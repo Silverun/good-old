@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "1024142726703",
+    "project_id": "good-old-dbf3c",
+    "storage_bucket": "good-old-dbf3c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1024142726703:android:6bcec8bb75352827a998da",
+        "android_client_info": {
+          "package_name": "com.anonymous.goodold"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1024142726703-41d8c2c4bke8hncvoovbv8u468d7pj08.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.anonymous.goodold",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "1024142726703-dldv9tk3164p4pjgceq8d7not1e4mva3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCqZHixCQ8nFZrn6xmoBRVXSZe0UinQ15A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1024142726703-dldv9tk3164p4pjgceq8d7not1e4mva3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1024142726703-g381u787ntgdh41urf04c94ahef2jd06.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.anonymous.goodold"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,8 +1,6 @@
-import ProfileScreen from "../screens/Main/Profile/Profile";
-import LotsScreen from "../screens/Main/Lots";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { MainRoutes } from ".";
-import MyLotsScreen from "../screens/Main/MyLots";
+import { MainRoutes } from "./routes";
+import { LotsScreen, MyLotsScreen, ProfileScreen } from "../screens";
 
 const Tabs = createBottomTabNavigator();
 

@@ -20,7 +20,7 @@ const dark = {
 
 export type Theme = typeof light;
 
-export const themes = {
+export const THEMES = {
   light,
   dark,
 };
