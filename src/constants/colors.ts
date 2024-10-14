@@ -1,4 +1,4 @@
-const palette = {
+const PALLETTE = {
   moss_green: "#92977e",
   flax: "#e6e18e",
   vanilla: "#fefcad",
@@ -9,7 +9,7 @@ const palette = {
 const light = {
   text: "black",
   background: "#fff",
-  buttonBackground: palette.moss_green,
+  buttonBackground: PALLETTE.moss_green,
 };
 
 const dark = {

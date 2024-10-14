@@ -7,7 +7,7 @@ const Stack = createNativeStackNavigator();
 
 const RootNavigation = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name={RootRoutes.auth} component={AuthNavigation} />
       <Stack.Screen name={RootRoutes.main} component={MainNavigation} />
     </Stack.Navigator>
