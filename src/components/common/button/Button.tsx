@@ -1,21 +1,32 @@
-import { TouchableOpacity, TouchableOpacityProps, View } from "react-native";
-import { styles } from "./Button.styles";
-import { Theme } from "../../../constants/colors";
+import {
+  Text,
+  TouchableOpacity,
+  TouchableOpacityProps,
+  View,
+} from "react-native";
+import { createStyle } from "./Button.styles";
+import { useAppSelector } from "../../../hooks/useRedux";
+import Loader from "../loader/Loader";
 
 interface ButtonCustomProps extends TouchableOpacityProps {
-  children?: React.ReactNode;
-  theme: Theme;
-  styles: any
+  title: string;
+  loading?: boolean;
 }
 
-const ButtonCustom = ({ children, theme, styles, ...props }: ButtonCustomProps) => {
+const ButtonCustom = ({ title, loading, ...props }: ButtonCustomProps) => {
+  const theme = useAppSelector((state) => state.theme.theme);
+  const style = createStyle(theme);
+
   return (
-    <View style={styles(theme)}>
-        <TouchableOpacity {...props} }>
-      {children}
+    <TouchableOpacity {...props}>
+      <View style={style.button}>
+        {loading ? (
+          <Loader size="small" />
+        ) : (
+          <Text style={style.buttonText}>{title}</Text>
+        )}
+      </View>
     </TouchableOpacity>
-    </View> 
-    
   );
 };
 

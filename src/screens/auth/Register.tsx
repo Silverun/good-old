@@ -1,5 +1,5 @@
 import { StyleSheet, View } from "react-native";
-import { RegisterForm } from "../../components/presentation/auth/RegisterForm";
+import { RegisterForm } from "../../components/presentation/auth/registerForm/RegisterForm";
 const RegisterScreen = () => {
   return (
     <View style={styles.container}>

@@ -1,6 +1,7 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { MainRoutes } from "./routes";
-import { LotsScreen, MyLotsScreen, ProfileScreen } from "../screens";
+import { MainRoutes } from "../routes";
+import { LotsScreen, MyLotsScreen, ProfileScreen } from "../../screens";
+import AuthGate from "../../components/presentation/auth/authGate/AuthGate";
 
 const Tabs = createBottomTabNavigator();
 

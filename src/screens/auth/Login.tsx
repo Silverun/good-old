@@ -1,19 +1,25 @@
-import { useNavigation } from "@react-navigation/native";
-import { View, Text, Button } from "react-native";
+import { View, Button, StyleSheet } from "react-native";
 import { AuthRoutes } from "../../navigation/routes";
-import { AuthNavigationProp, AuthScreenProps } from "../../navigation/types";
+import { AuthScreenProps } from "../../navigation/types";
+import { LoginForm } from "../../components/presentation/auth/loginForm/LoginForm";
 
 const LoginScreen = ({ navigation }: AuthScreenProps) => {
   return (
-    <View>
-      <Text>Login</Text>
+    <View style={styles.container}>
+      <LoginForm />
       <Button
         title="Register"
-        onPress={() => {
-          navigation.navigate(AuthRoutes.register);
-        }}
+        onPress={() => navigation.navigate(AuthRoutes.register)}
       />
     </View>
   );
 };
 export default LoginScreen;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    // justifyContent: "center",
+    // alignItems: "center",
+  },
+});

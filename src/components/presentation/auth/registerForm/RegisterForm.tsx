@@ -1,24 +1,51 @@
-import React from "react";
-import { View, Text, TextInput, Button } from "react-native";
+import React, { useState } from "react";
+import { View, Text, TextInput } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import { styles } from "./RegisterForm.styles";
+import ButtonCustom from "../../../common/button/Button";
+import auth from "@react-native-firebase/auth";
+import firestore from "@react-native-firebase/firestore";
+import { USER } from "../../../../constants";
+import { ReactNativeFirebase } from "@react-native-firebase/app";
 
-interface FormData {
-  name: string;
+interface RegisterFormData {
+  firstName: string;
   lastName: string;
   email: string;
   password: string;
 }
 
 export const RegisterForm = () => {
+  // const [loading, setLoading] = useState(false);
   const {
     control,
     handleSubmit,
-    formState: { errors },
-  } = useForm<FormData>();
+    formState: { errors, isSubmitting },
+  } = useForm<RegisterFormData>();
 
-  const onSubmit = (data: FormData) => {
-    console.log(data); // You can handle form submission here
+  const signUp = async (data: RegisterFormData) => {
+    const { email, password, lastName, firstName } = data;
+    // setLoading(true);
+    try {
+      const { user } = await auth().createUserWithEmailAndPassword(
+        email,
+        password
+      );
+
+      firestore().collection("users").doc(user?.uid).set({
+        firstName,
+        lastName,
+        email,
+        credits: USER.default_credits,
+        image: null,
+        createdAt: firestore.FieldValue.serverTimestamp(),
+      });
+    } catch (e: unknown) {
+      const err = e as ReactNativeFirebase.NativeFirebaseError;
+      alert("Registration failed: " + err.message);
+    } finally {
+      // setLoading(false);
+    }
   };
 
   return (
@@ -26,7 +53,7 @@ export const RegisterForm = () => {
       <Text style={styles.label}>First Name</Text>
       <Controller
         control={control}
-        name="name"
+        name="firstName"
         rules={{ required: "First name is required" }}
         render={({ field: { onChange, value } }) => (
           <TextInput
@@ -37,7 +64,9 @@ export const RegisterForm = () => {
           />
         )}
       />
-      {errors.name && <Text style={styles.error}>{errors.name.message}</Text>}
+      {errors.firstName && (
+        <Text style={styles.error}>{errors.firstName.message}</Text>
+      )}
 
       <Text style={styles.label}>Last Name</Text>
       <Controller
@@ -106,7 +135,11 @@ export const RegisterForm = () => {
         <Text style={styles.error}>{errors.password.message}</Text>
       )}
 
-      <Button title="Register" onPress={handleSubmit(onSubmit)} />
+      <ButtonCustom
+        loading={isSubmitting}
+        title="Register"
+        onPress={handleSubmit(signUp)}
+      />
     </View>
   );
 };

@@ -10,6 +10,7 @@ const light = {
   text: "black",
   background: "#fff",
   buttonBackground: PALLETTE.moss_green,
+  buttonTextColor: PALLETTE.cornsilk,
 };
 
 const dark = {
