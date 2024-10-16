@@ -7,7 +7,17 @@ export const SIZES = {
   large: 18,
   xlarge: 24,
   xxlarge: 32,
-};
+} as const;
+
+export const FONTS_SIZES = {
+  h1: 32,
+  h2: 24,
+  h3: 18,
+  h4: 16,
+  h5: 14,
+  h6: 12,
+  p: 14,
+} as const;
 
 const deviceWidth = Dimensions.get("screen").width;
 export const deviceWidthRatio = (ratio: number) => deviceWidth * ratio;
@@ -21,4 +31,4 @@ export const WIDTH = {
   seventy: deviceWidthRatio(0.7),
   eighty: deviceWidthRatio(0.8),
   ninety: deviceWidthRatio(0.9),
-};
+} as const;

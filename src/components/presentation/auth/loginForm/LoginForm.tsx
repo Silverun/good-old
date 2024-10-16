@@ -1,10 +1,11 @@
 import React from "react";
-import { View, Text, TextInput } from "react-native";
-import { useForm, Controller } from "react-hook-form";
+import { View } from "react-native";
+import { useForm } from "react-hook-form";
 import auth from "@react-native-firebase/auth";
 import { ReactNativeFirebase } from "@react-native-firebase/app";
-import { styles } from "./LoginForm.styles"; // Assume you have some basic styles
+import { styles } from "./LoginForm.styles";
 import ButtonCustom from "../../../common/button/Button";
+import InputRHF from "../../../common/react-hook-form/InputRHF";
 
 interface LoginFormData {
   email: string;
@@ -22,7 +23,6 @@ export const LoginForm = () => {
     const { email, password } = data;
     try {
       await auth().signInWithEmailAndPassword(email, password);
-      // Handle success (e.g., navigate to another screen or update global state)
     } catch (e: unknown) {
       const err = e as ReactNativeFirebase.NativeFirebaseError;
       alert("Login failed: " + err.message);
@@ -31,59 +31,30 @@ export const LoginForm = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>Email</Text>
-      <Controller
-        control={control}
+      <InputRHF
+        label="Email"
         name="email"
-        rules={{
-          required: "Email is required",
-          pattern: {
-            value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
-            message: "Invalid email address",
-          },
-        }}
-        render={({ field: { onChange, value } }) => (
-          <TextInput
-            style={styles.input}
-            placeholder="Enter your email"
-            onChangeText={onChange}
-            value={value}
-            keyboardType="email-address"
-            autoCapitalize="none"
-          />
-        )}
-      />
-      {errors.email && <Text style={styles.error}>{errors.email.message}</Text>}
-
-      <Text style={styles.label}>Password</Text>
-      <Controller
         control={control}
-        name="password"
-        rules={{
-          required: "Password is required",
-          minLength: {
-            value: 6,
-            message: "Password must be at least 6 characters",
-          },
-        }}
-        render={({ field: { onChange, value } }) => (
-          <TextInput
-            style={styles.input}
-            placeholder="Enter your password"
-            onChangeText={onChange}
-            value={value}
-            secureTextEntry
-          />
-        )}
+        rules={{ required: "Email is required" }}
+        errors={errors}
+        placeholder="Enter your email"
+        keyboardType="email-address"
+        autoCapitalize="none"
       />
-      {errors.password && (
-        <Text style={styles.error}>{errors.password.message}</Text>
-      )}
+      <InputRHF
+        label="Password"
+        name="password"
+        control={control}
+        rules={{ required: "Password is required" }}
+        errors={errors}
+        placeholder="Enter your password"
+        secureTextEntry
+      />
 
       <ButtonCustom
-        loading={isSubmitting} // Pass isSubmitting for loading indicator
+        loading={isSubmitting}
         title="Login"
-        onPress={handleSubmit(login)} // handleSubmit will trigger the form validation and submission
+        onPress={handleSubmit(login)}
       />
     </View>
   );

@@ -1,4 +1,4 @@
-import LoginScreen from "./auth/Login";
+import LoginScreen from "./auth/login/Login";
 import RegisterScreen from "./auth/Register";
 import ProfileScreen from "./main/Profile/Profile";
 import LotsScreen from "./main/Lots";

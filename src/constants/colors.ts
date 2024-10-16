@@ -4,7 +4,7 @@ const PALLETTE = {
   vanilla: "#fefcad",
   vanilla_2: "#eadda6",
   cornsilk: "#fffae2",
-};
+} as const;
 
 const light = {
   text: "black",
