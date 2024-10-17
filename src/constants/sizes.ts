@@ -19,6 +19,8 @@ export const FONTS_SIZES = {
   p: 14,
 } as const;
 
+export type FontSizes = keyof typeof FONTS_SIZES;
+
 const deviceWidth = Dimensions.get("screen").width;
 export const deviceWidthRatio = (ratio: number) => deviceWidth * ratio;
 

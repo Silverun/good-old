@@ -7,7 +7,7 @@ const PALLETTE = {
 } as const;
 
 const light = {
-  text: "black",
+  textColor: "black",
   background: "#fff",
   buttonBackground: PALLETTE.moss_green,
   buttonTextColor: PALLETTE.cornsilk,
@@ -15,7 +15,7 @@ const light = {
 
 const dark = {
   ...light,
-  text: "white",
+  textColor: "white",
   background: "black",
 };
 

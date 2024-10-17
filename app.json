@@ -37,6 +37,17 @@
             "useFrameworks": "static"
           }
         }
+      ],
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "./src/assets/fonts/Ubuntu-Light.ttf",
+            "./src/assets/fonts/Ubuntu-Regular.ttf",
+            "./src/assets/fonts/Ubuntu-Medium.ttf",
+            "./src/assets/fonts/Ubuntu-Bold.ttf"
+          ]
+        }
       ]
     ]
   }

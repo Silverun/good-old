@@ -9,7 +9,14 @@ interface TextLinkProps extends TouchableOpacityProps {
 const TextLink = ({ title, fontSize, ...props }: TextLinkProps) => {
   return (
     <TouchableOpacity {...props}>
-      <Text style={{ fontSize: FONTS_SIZES[fontSize] }}>{title}</Text>
+      <Text
+        style={{
+          fontSize: FONTS_SIZES[fontSize],
+          fontFamily: "Roboto-Regular",
+        }}
+      >
+        {title}
+      </Text>
     </TouchableOpacity>
   );
 };
