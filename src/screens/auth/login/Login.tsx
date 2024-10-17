@@ -1,10 +1,9 @@
-import { View, Text } from "react-native";
+import { View } from "react-native";
 import { AuthRoutes } from "../../../navigation/routes";
 import { AuthScreenProps } from "../../../navigation/types";
 import { LoginForm } from "../../../components/presentation/auth/loginForm/LoginForm";
 import { styles } from "./Login.styles";
-import TextLink from "../../../components/common/link/TextLink";
-import { TextCustom } from "../../../components/common";
+import { TextCustom, TextLink } from "../../../components/common";
 
 const LoginScreen = ({ navigation }: AuthScreenProps) => {
   return (

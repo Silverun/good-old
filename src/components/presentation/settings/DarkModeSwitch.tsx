@@ -1,14 +1,15 @@
 import React from "react";
-import { View, Text, StyleSheet, Switch } from "react-native";
-import { useAppDispatch, useAppSelector } from "../../../hooks/useRedux";
+import { View, StyleSheet, Switch } from "react-native";
+import { useAppDispatch } from "../../../hooks/useRedux";
 import {
   setDarkTheme,
   setLightTheme,
 } from "../../../store/themeSlice/themeSlice";
+import { useThemeCustom } from "../../../hooks";
 
-export default function SettingsScreen() {
+export const DarkModeSwitch = () => {
   const dispatch = useAppDispatch();
-  const { theme, isDarkTheme } = useAppSelector((state) => state.theme);
+  const { isDarkTheme } = useThemeCustom();
 
   const toggleTheme = () => {
     if (isDarkTheme) {
@@ -19,22 +20,21 @@ export default function SettingsScreen() {
   };
 
   return (
-    <View style={[styles.container, { backgroundColor: theme.background }]}>
-      <Text style={[styles.text, { color: theme.text }]}>
-        Current theme is {isDarkTheme ? "Dark" : "Light"}
-      </Text>
+    <View style={styles.container}>
       <Switch value={isDarkTheme} onValueChange={toggleTheme} />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-  },
-  text: {
-    fontSize: 20,
+    ///DELETE AFTER
+    position: "absolute", // Absolute positioning
+    top: 60, // Distance from the top
+    right: 10, // Distance from the right
+    zIndex: 9999, // Ensure it stays on top of other components
   },
 });

@@ -1,9 +1,10 @@
 import { useAppSelector } from "./useRedux";
 
 export const useThemeCustom = () => {
-  const theme = useAppSelector((state) => state.theme.theme);
+  const { theme, isDarkTheme } = useAppSelector((state) => state.theme);
 
   return {
     theme,
+    isDarkTheme,
   };
 };

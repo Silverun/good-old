@@ -1,10 +1,10 @@
-import { View, Text, ActivityIndicator } from "react-native";
+import { View, ActivityIndicator } from "react-native";
 
 type LoaderProps = {
   size: "large" | "small";
 };
 
-const Loader = ({ size }: LoaderProps) => {
+export const Loader = ({ size }: LoaderProps) => {
   return (
     <View
       style={{
@@ -17,4 +17,3 @@ const Loader = ({ size }: LoaderProps) => {
     </View>
   );
 };
-export default Loader;

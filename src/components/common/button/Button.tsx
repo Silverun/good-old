@@ -6,14 +6,18 @@ import {
 } from "react-native";
 import { createStyle } from "./Button.styles";
 import { useAppSelector } from "../../../hooks/useRedux";
-import Loader from "../loader/Loader";
+import { Loader } from "../loader/Loader";
 
 interface ButtonCustomProps extends TouchableOpacityProps {
   title: string;
   loading?: boolean;
 }
 
-const ButtonCustom = ({ title, loading, ...props }: ButtonCustomProps) => {
+export const ButtonCustom = ({
+  title,
+  loading,
+  ...props
+}: ButtonCustomProps) => {
   const theme = useAppSelector((state) => state.theme.theme);
   const style = createStyle(theme);
 
@@ -29,5 +33,3 @@ const ButtonCustom = ({ title, loading, ...props }: ButtonCustomProps) => {
     </TouchableOpacity>
   );
 };
-
-export default ButtonCustom;

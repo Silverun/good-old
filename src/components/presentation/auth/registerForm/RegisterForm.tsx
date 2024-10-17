@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, Text, TextInput } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import { styles } from "./RegisterForm.styles";
-import ButtonCustom from "../../../common/button/Button";
 import auth from "@react-native-firebase/auth";
 import firestore from "@react-native-firebase/firestore";
 import { USER } from "../../../../constants";
 import { ReactNativeFirebase } from "@react-native-firebase/app";
+import { ButtonCustom } from "../../../common";
 
 interface RegisterFormData {
   firstName: string;
@@ -16,7 +16,6 @@ interface RegisterFormData {
 }
 
 export const RegisterForm = () => {
-  // const [loading, setLoading] = useState(false);
   const {
     control,
     handleSubmit,
@@ -25,7 +24,7 @@ export const RegisterForm = () => {
 
   const signUp = async (data: RegisterFormData) => {
     const { email, password, lastName, firstName } = data;
-    // setLoading(true);
+
     try {
       const { user } = await auth().createUserWithEmailAndPassword(
         email,
@@ -43,8 +42,6 @@ export const RegisterForm = () => {
     } catch (e: unknown) {
       const err = e as ReactNativeFirebase.NativeFirebaseError;
       alert("Registration failed: " + err.message);
-    } finally {
-      // setLoading(false);
     }
   };
 

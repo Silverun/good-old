@@ -20,7 +20,7 @@ interface InputRHFProps<TFieldValues extends FieldValues>
   errors?: FieldErrors<TFieldValues>;
 }
 
-const InputRHF = <TFieldValues extends FieldValues>({
+export const InputRHF = <TFieldValues extends FieldValues>({
   label,
   errors,
   control,
@@ -54,4 +54,3 @@ const InputRHF = <TFieldValues extends FieldValues>({
     </>
   );
 };
-export default InputRHF;

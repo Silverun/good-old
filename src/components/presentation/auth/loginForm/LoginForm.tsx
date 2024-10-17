@@ -4,8 +4,7 @@ import { useForm } from "react-hook-form";
 import auth from "@react-native-firebase/auth";
 import { ReactNativeFirebase } from "@react-native-firebase/app";
 import { styles } from "./LoginForm.styles";
-import ButtonCustom from "../../../common/button/Button";
-import InputRHF from "../../../common/react-hook-form/InputRHF";
+import { ButtonCustom, InputRHF } from "../../../common";
 
 interface LoginFormData {
   email: string;
@@ -50,7 +49,6 @@ export const LoginForm = () => {
         placeholder="Enter your password"
         secureTextEntry
       />
-
       <ButtonCustom
         loading={isSubmitting}
         title="Login"

@@ -6,7 +6,7 @@ interface TextLinkProps extends TouchableOpacityProps {
   fontSize: keyof typeof FONTS_SIZES;
 }
 
-const TextLink = ({ title, fontSize, ...props }: TextLinkProps) => {
+export const TextLink = ({ title, fontSize, ...props }: TextLinkProps) => {
   return (
     <TouchableOpacity {...props}>
       <Text
@@ -20,4 +20,3 @@ const TextLink = ({ title, fontSize, ...props }: TextLinkProps) => {
     </TouchableOpacity>
   );
 };
-export default TextLink;
