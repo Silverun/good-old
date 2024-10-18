@@ -1,4 +1,4 @@
-import React from "react";
+import React, { lazy } from "react";
 import { View, Text, TextInput } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import auth from "@react-native-firebase/auth";
@@ -28,13 +28,27 @@ export const LoginForm = () => {
     }
   };
 
+  const data = [
+    {
+      label: "Email",
+      name: "email",
+      rules: obj,
+      textInputProps: {
+        style: styles.input,
+        placeholder: "Enter your email",
+        keyboardType: "email-address",
+        autoCapitalize: "none",
+      },
+    },
+  ];
+
   return (
     <View style={styles.container}>
       <Text style={styles.label}>Email</Text>
       <Controller
         control={control}
         name="email"
-        rules={}
+        rules={obj}
         render={({ field: { onChange, value } }) => (
           <TextInput
             style={styles.input}

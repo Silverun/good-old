@@ -4,16 +4,17 @@ import { Provider } from "react-redux";
 import { store } from "./src/store/rootStore";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { RootLayout } from "./src/components/presentation/layouts/RootLayout";
+import ThemedNavContainer from "./src/navigation/ThemedNavContainer";
 
 const App = () => {
   return (
     <Provider store={store}>
       <SafeAreaProvider>
-        <NavigationContainer>
+        <ThemedNavContainer>
           <RootLayout>
             <RootNavigation />
           </RootLayout>
-        </NavigationContainer>
+        </ThemedNavContainer>
       </SafeAreaProvider>
     </Provider>
   );
