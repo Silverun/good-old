@@ -1,5 +1,15 @@
 import { Theme as NavTheme } from "@react-navigation/native";
 
+export type Theme = {
+  navigator: NavTheme;
+  textColor: string;
+  background: string;
+  buttonBackground: string;
+  buttonTextColor: string;
+  inputBackground?: string;
+  inputBorderColor: string;
+};
+
 const PALLETTE = {
   moss_green: "#92977e",
   flax: "#e6e18e",
@@ -28,6 +38,7 @@ const light: Theme = {
   background: PALLETTE.white,
   buttonBackground: PALLETTE.moss_green,
   buttonTextColor: PALLETTE.cornsilk,
+  inputBorderColor: PALLETTE.moss_green,
 };
 
 const dark: Theme = {
@@ -46,15 +57,6 @@ const dark: Theme = {
   textColor: PALLETTE.fluorescent_cyan,
   background: PALLETTE.dark_green,
   inputBackground: PALLETTE.black,
-};
-
-export type Theme = {
-  navigator: NavTheme;
-  textColor: string;
-  background: string;
-  buttonBackground: string;
-  buttonTextColor: string;
-  inputBackground?: string;
 };
 
 export const THEMES = {

@@ -4,8 +4,10 @@ import {
   FieldErrors,
   FieldValues,
 } from "react-hook-form";
-import { Text, TextInput, TextInputProps } from "react-native";
+import { TextInputProps } from "react-native";
 import { styles } from "./InputRHF.styles";
+import { TextCustom } from "../text/TextCustom";
+import { TextInputCustom } from "../input/TextInputCustom";
 
 type TextInputPartial = Omit<
   TextInputProps,
@@ -20,6 +22,14 @@ interface InputRHFProps<TFieldValues extends FieldValues>
   errors?: FieldErrors<TFieldValues>;
 }
 
+// interface InputRHFProps<TFieldValues extends FieldValues>
+//   extends ControllerProps<TFieldValues>,
+//     TextInputPartial {
+//   label: string;
+//   defaultValue?: any;
+//   errors?: FieldErrors<TFieldValues>;
+// }
+
 export const InputRHF = <TFieldValues extends FieldValues>({
   label,
   errors,
@@ -32,13 +42,13 @@ export const InputRHF = <TFieldValues extends FieldValues>({
 }: InputRHFProps<TFieldValues>) => {
   return (
     <>
-      <Text style={styles.label}>{label}</Text>
+      <TextCustom style={styles.label}>{label}</TextCustom>
       <Controller
         control={control}
         name={name}
         rules={rules}
         render={({ field: { onChange, value } }) => (
-          <TextInput
+          <TextInputCustom
             style={styles.input}
             placeholder={placeholder}
             onChangeText={onChange}
@@ -49,7 +59,9 @@ export const InputRHF = <TFieldValues extends FieldValues>({
         )}
       />
       {errors?.[name]?.message && (
-        <Text style={styles.error}>{errors[name]?.message as string}</Text>
+        <TextCustom style={styles.error}>
+          {errors[name]?.message as string}
+        </TextCustom>
       )}
     </>
   );

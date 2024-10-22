@@ -9,9 +9,9 @@ const LoginScreen = ({ navigation }: AuthScreenProps) => {
   return (
     <View style={styles.container}>
       <LoginForm />
-      <TextCustom size="h4">Not registered yet?</TextCustom>
+      <TextCustom fontWeight="light">Not registered yet?</TextCustom>
       <TextLink
-        fontSize="h5"
+        size="h3"
         title="Register"
         onPress={() => navigation.navigate(AuthRoutes.register)}
       />

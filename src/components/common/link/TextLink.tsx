@@ -1,22 +1,23 @@
-import { Text, TouchableOpacity, TouchableOpacityProps } from "react-native";
-import { FONTS_SIZES } from "../../../constants";
+import { TouchableOpacity, TouchableOpacityProps } from "react-native";
+import { TextCustom, TextCustomProps } from "../text/TextCustom";
 
 interface TextLinkProps extends TouchableOpacityProps {
   title: string;
-  fontSize: keyof typeof FONTS_SIZES;
+  size?: TextCustomProps["size"];
+  fontWeight?: TextCustomProps["fontWeight"];
 }
 
-export const TextLink = ({ title, fontSize, ...props }: TextLinkProps) => {
+export const TextLink = ({
+  title,
+  size,
+  fontWeight,
+  ...props
+}: TextLinkProps) => {
   return (
     <TouchableOpacity {...props}>
-      <Text
-        style={{
-          fontSize: FONTS_SIZES[fontSize],
-          fontFamily: "Roboto-Regular",
-        }}
-      >
+      <TextCustom size={size} fontWeight={fontWeight}>
         {title}
-      </Text>
+      </TextCustom>
     </TouchableOpacity>
   );
 };

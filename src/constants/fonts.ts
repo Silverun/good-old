@@ -10,3 +10,5 @@ export const FONT_FAMILIES = {
   medium: `${defaultFont}-Medium`,
   bold: `${defaultFont}-Bold`,
 } as const;
+
+export type FontFamiliesWeights = keyof typeof FONT_FAMILIES;
