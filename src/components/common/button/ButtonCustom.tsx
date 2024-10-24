@@ -4,9 +4,10 @@ import {
   TouchableOpacityProps,
   View,
 } from "react-native";
-import { createStyle } from "./Button.styles";
+import { createStyle } from "./ButtonCustom.styles";
 import { useAppSelector } from "../../../hooks/useRedux";
 import { Loader } from "../loader/Loader";
+import { TextCustom } from "../text/TextCustom";
 
 interface ButtonCustomProps extends TouchableOpacityProps {
   title: string;
@@ -16,18 +17,25 @@ interface ButtonCustomProps extends TouchableOpacityProps {
 export const ButtonCustom = ({
   title,
   loading,
+  style,
   ...props
 }: ButtonCustomProps) => {
   const theme = useAppSelector((state) => state.theme.theme);
-  const style = createStyle(theme);
+  const styleCustom = createStyle(theme);
 
   return (
     <TouchableOpacity {...props}>
-      <View style={style.button}>
+      <View style={[styleCustom.button, style]}>
         {loading ? (
           <Loader size="small" />
         ) : (
-          <Text style={style.buttonText}>{title}</Text>
+          <TextCustom
+            style={styleCustom.buttonText}
+            fontWeight="bold"
+            size="h3"
+          >
+            {title}
+          </TextCustom>
         )}
       </View>
     </TouchableOpacity>

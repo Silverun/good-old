@@ -1,12 +1,13 @@
 import React from "react";
-import { View, Text, TextInput } from "react-native";
-import { useForm, Controller } from "react-hook-form";
+import { View } from "react-native";
+import { useForm } from "react-hook-form";
 import { styles } from "./RegisterForm.styles";
 import auth from "@react-native-firebase/auth";
 import firestore from "@react-native-firebase/firestore";
 import { USER } from "../../../../constants";
 import { ReactNativeFirebase } from "@react-native-firebase/app";
-import { ButtonCustom } from "../../../common";
+import { ButtonCustom, RHFField } from "../../../common";
+import { VALID_NAME } from "../../../../constants/locales";
 
 interface RegisterFormData {
   firstName: string;
@@ -47,91 +48,79 @@ export const RegisterForm = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>First Name</Text>
-      <Controller
-        control={control}
-        name="firstName"
-        rules={{ required: "First name is required" }}
-        render={({ field: { onChange, value } }) => (
-          <TextInput
-            style={styles.input}
-            placeholder="Enter your first name"
-            onChangeText={onChange}
-            value={value}
-          />
-        )}
-      />
-      {errors.firstName && (
-        <Text style={styles.error}>{errors.firstName.message}</Text>
-      )}
-
-      <Text style={styles.label}>Last Name</Text>
-      <Controller
-        control={control}
-        name="lastName"
-        rules={{ required: "Last name is required" }}
-        render={({ field: { onChange, value } }) => (
-          <TextInput
-            style={styles.input}
-            placeholder="Enter your last name"
-            onChangeText={onChange}
-            value={value}
-          />
-        )}
-      />
-      {errors.lastName && (
-        <Text style={styles.error}>{errors.lastName.message}</Text>
-      )}
-
-      <Text style={styles.label}>Email</Text>
-      <Controller
-        control={control}
-        name="email"
-        rules={{
-          required: "Email is required",
-          pattern: {
-            value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
-            message: "Invalid email address",
+      <RHFField
+        label={{ text: "First Name" }}
+        controller={{
+          name: "firstName",
+          control,
+          rules: {
+            required: "First name is required",
+            minLength: {
+              value: 2,
+              message: "Name should be at least 2 characters",
+            },
+            pattern: { value: VALID_NAME, message: "Invalid first name" },
           },
         }}
-        render={({ field: { onChange, value } }) => (
-          <TextInput
-            style={styles.input}
-            placeholder="Enter your email"
-            onChangeText={onChange}
-            value={value}
-            keyboardType="email-address"
-            autoCapitalize="none"
-          />
-        )}
+        input={{ placeholder: "Enter your first name" }}
+        error={{ errors }}
       />
-      {errors.email && <Text style={styles.error}>{errors.email.message}</Text>}
-
-      <Text style={styles.label}>Password</Text>
-      <Controller
-        control={control}
-        name="password"
-        rules={{
-          required: "Password is required",
-          minLength: {
-            value: 6,
-            message: "Password must be at least 6 characters",
+      <RHFField
+        label={{ text: "Last Name" }}
+        controller={{
+          name: "lastName",
+          control,
+          rules: {
+            required: "Last name is required",
+            pattern: { value: VALID_NAME, message: "Invalid last name" },
+            minLength: {
+              value: 2,
+              message: "Last name should be at least 2 characters",
+            },
           },
         }}
-        render={({ field: { onChange, value } }) => (
-          <TextInput
-            style={styles.input}
-            placeholder="Enter your password"
-            onChangeText={onChange}
-            value={value}
-            secureTextEntry
-          />
-        )}
+        input={{ placeholder: "Enter your last name" }}
+        error={{ errors }}
       />
-      {errors.password && (
-        <Text style={styles.error}>{errors.password.message}</Text>
-      )}
-
+      <RHFField
+        label={{ text: "Email" }}
+        controller={{
+          name: "email",
+          control,
+          rules: {
+            required: "Email is required",
+            pattern: {
+              value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+              message: "Invalid email address",
+            },
+          },
+        }}
+        input={{
+          placeholder: "Enter your email",
+          keyboardType: "email-address",
+          autoCapitalize: "none",
+        }}
+        error={{ errors }}
+      />
+      <RHFField
+        label={{ text: "Password" }}
+        controller={{
+          name: "password",
+          control,
+          rules: {
+            required: "Password is required",
+            minLength: {
+              value: 6,
+              message: "Password must be at least 6 characters",
+            },
+          },
+        }}
+        input={{
+          placeholder: "Enter your password",
+          secureTextEntry: true,
+        }}
+        error={{ errors }}
+      />
       <ButtonCustom
         loading={isSubmitting}
         title="Register"

@@ -1,10 +1,10 @@
 import { StyleSheet } from "react-native";
-import { Theme, WIDTH } from "../../../constants";
+import { deviceHeightRatio, HEIGHT, Theme, WIDTH } from "../../../constants";
 
 export const createStyle = (theme: Theme) =>
   StyleSheet.create({
     button: {
-      width: WIDTH.fifty,
+      minHeight: deviceHeightRatio(0.05),
       backgroundColor: theme.buttonBackground,
       paddingVertical: 12,
       paddingHorizontal: 24,
@@ -19,7 +19,5 @@ export const createStyle = (theme: Theme) =>
     },
     buttonText: {
       color: theme.buttonTextColor,
-      fontSize: 16,
-      fontWeight: "600",
     },
   });

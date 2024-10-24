@@ -1,10 +1,10 @@
 import React from "react";
-import { View } from "react-native";
+import { Button, View } from "react-native";
 import { useForm } from "react-hook-form";
 import auth from "@react-native-firebase/auth";
 import { ReactNativeFirebase } from "@react-native-firebase/app";
 import { styles } from "./LoginForm.styles";
-import { ButtonCustom, InputRHF } from "../../../common";
+import { ButtonCustom, RHFField } from "../../../common";
 
 interface LoginFormData {
   email: string;
@@ -20,6 +20,7 @@ export const LoginForm = () => {
 
   const login = async (data: LoginFormData) => {
     const { email, password } = data;
+    console.log(email, password);
     try {
       await auth().signInWithEmailAndPassword(email, password);
     } catch (e: unknown) {
@@ -30,26 +31,37 @@ export const LoginForm = () => {
 
   return (
     <View style={styles.container}>
-      <InputRHF
-        label="Email"
-        name="email"
-        control={control}
-        rules={{ required: "Email is required" }}
-        errors={errors}
-        placeholder="Enter your email"
-        keyboardType="email-address"
-        autoCapitalize="none"
+      <RHFField
+        label={{ text: "Email" }}
+        controller={{
+          name: "email",
+          control,
+          rules: { required: "Email is required" },
+        }}
+        input={{
+          placeholder: "Enter your email",
+          keyboardType: "email-address",
+          autoCapitalize: "none",
+          style: styles.input,
+        }}
+        error={{ errors }}
       />
-      <InputRHF
-        label="Password"
-        name="password"
-        control={control}
-        rules={{ required: "Password is required" }}
-        errors={errors}
-        placeholder="Enter your password"
-        secureTextEntry
+      <RHFField
+        label={{ text: "Password" }}
+        controller={{
+          name: "password",
+          control,
+          rules: { required: "Password is required" },
+        }}
+        input={{
+          placeholder: "Enter your password",
+          secureTextEntry: true,
+          style: styles.input,
+        }}
+        error={{ errors }}
       />
       <ButtonCustom
+        style={styles.loginButton}
         loading={isSubmitting}
         title="Login"
         onPress={handleSubmit(login)}

@@ -6,10 +6,15 @@ export const AuthRoutes = {
 export const MainRoutes = {
   lots: "Lots",
   profile: "Profile",
-  myLots: "MyLots",
+  myLots: "My Lots",
 } as const;
 
 export const RootRoutes = {
   auth: "Auth",
   main: "Main",
+} as const;
+
+export const MyLotsRoutes = {
+  myLotsList: "My lots list",
+  addLot: "Add new lot",
 } as const;
