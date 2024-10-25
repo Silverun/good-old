@@ -8,27 +8,32 @@ type MainTabsScreenOptions = (props: {
   navigation: any;
 }) => BottomTabNavigationOptions;
 
-export const MainTabsScreenOptions: MainTabsScreenOptions = ({ route }) => {
-  let iconName: keyof typeof MaterialIcons.glyphMap;
+export const MainTabsScreenOptions =
+  (currentScreen: string): MainTabsScreenOptions =>
+  ({ route }) => {
+    let iconName: keyof typeof MaterialIcons.glyphMap;
 
-  switch (route.name) {
-    case "Lots":
-      iconName = "view-list";
-      break;
-    case "Profile":
-      iconName = "person";
-      break;
-    case "My Lots":
-      iconName = "bookmarks";
-      break;
-    default:
-      iconName = "home";
-  }
+    switch (route.name) {
+      case "Lots":
+        iconName = "view-list";
+        break;
+      case "Profile":
+        iconName = "person";
+        break;
+      case "My Lots":
+        iconName = "bookmarks";
+        break;
+      default:
+        iconName = "home";
+    }
 
-  return {
-    headerShown: false,
-    tabBarIcon: ({ color, size }) => (
-      <MaterialIcons name={iconName} color={color} size={size} />
-    ),
+    return {
+      headerShown: false,
+      tabBarStyle: {
+        display: currentScreen === "Add new lot" ? "none" : "flex",
+      },
+      tabBarIcon: ({ color, size }) => (
+        <MaterialIcons name={iconName} color={color} size={size} />
+      ),
+    };
   };
-};

@@ -4,6 +4,7 @@ import {
   NavigationContainerProps,
 } from "@react-navigation/native";
 import { useThemeCustom } from "../hooks";
+import { Navigation } from "./navigationRef";
 
 interface ThemedNavContainerProps extends NavigationContainerProps {}
 
@@ -11,7 +12,7 @@ const ThemedNavContainer = ({ children }: ThemedNavContainerProps) => {
   const { theme } = useThemeCustom();
 
   return (
-    <NavigationContainer theme={theme.navigator}>
+    <NavigationContainer ref={Navigation.ref} theme={theme.navigator}>
       {children}
     </NavigationContainer>
   );

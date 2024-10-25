@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, StyleSheet, ViewProps } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { DarkModeSwitch } from "../settings/DarkModeSwitch";
 import { useThemeCustom } from "../../../hooks";
 import { Theme } from "../../../constants";
-import { StatusBar } from "expo-status-bar";
+import {
+  setStatusBarStyle,
+  setStatusBarTranslucent,
+  StatusBar,
+} from "expo-status-bar";
 
 interface RootLayoutProps extends ViewProps {}
 
@@ -24,7 +28,11 @@ export const RootLayout = ({ children }: RootLayoutProps) => {
         },
       ]}
     >
-      <StatusBar style={isDarkTheme ? "light" : "dark"} />
+      <StatusBar
+        translucent={true}
+        // backgroundColor={theme.background}
+        style={isDarkTheme ? "light" : "dark"}
+      />
       {children}
       <DarkModeSwitch />
     </View>

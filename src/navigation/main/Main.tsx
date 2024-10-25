@@ -1,24 +1,20 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MainRoutes } from "../routes";
 import { LotsScreen, ProfileScreen } from "../../screens";
-import {
-  MainTabsNavigationProp,
-  MainTabsParamList,
-  MainTabsScreenProps,
-} from "./Main.types";
+import { MainTabsParamList, MainTabsScreenProps } from "./Main.types";
 import { MainTabsScreenOptions } from "./Main.options";
 import MyLotsNavigation from "../myLots/myLots";
-import { useRoute } from "@react-navigation/native";
-import { MyLotsRouteProp } from "../myLots/myLots.types";
 import { useEffect } from "react";
+import { useCurrentPath } from "../../hooks/usePath";
+import { useNavigationContainerRef } from "@react-navigation/native";
 
 const Tabs = createBottomTabNavigator<MainTabsParamList>();
 
-const MainNavigation = ({ route }: MainTabsScreenProps) => {
-  // const route = useRoute<MyLotsRouteProp>();
+const MainNavigation = () => {
+  const { currentScreen } = useCurrentPath();
 
   return (
-    <Tabs.Navigator screenOptions={MainTabsScreenOptions}>
+    <Tabs.Navigator screenOptions={MainTabsScreenOptions(currentScreen)}>
       <Tabs.Screen name={MainRoutes.lots} component={LotsScreen} />
       <Tabs.Screen name={MainRoutes.profile} component={ProfileScreen} />
       <Tabs.Screen name={MainRoutes.myLots} component={MyLotsNavigation} />
