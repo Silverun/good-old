@@ -27,6 +27,7 @@ export const deviceHeightRatio = (ratio: number) => deviceWidth.height * ratio;
 
 export const WIDTH = {
   ten: deviceWidthRatio(0.1),
+  fifteen: deviceWidthRatio(0.15),
   twenty: deviceWidthRatio(0.2),
   thirty: deviceWidthRatio(0.3),
   forty: deviceWidthRatio(0.4),

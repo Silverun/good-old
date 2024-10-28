@@ -1,5 +1,7 @@
 import {
+  Pressable,
   Text,
+  TouchableHighlight,
   TouchableOpacity,
   TouchableOpacityProps,
   View,
@@ -24,20 +26,14 @@ export const ButtonCustom = ({
   const styleCustom = createStyle(theme);
 
   return (
-    <TouchableOpacity {...props}>
-      <View style={[styleCustom.button, style]}>
-        {loading ? (
-          <Loader size="small" />
-        ) : (
-          <TextCustom
-            style={styleCustom.buttonText}
-            fontWeight="bold"
-            size="h3"
-          >
-            {title}
-          </TextCustom>
-        )}
-      </View>
+    <TouchableOpacity style={[styleCustom.button, style]} {...props}>
+      {loading ? (
+        <Loader size="small" />
+      ) : (
+        <TextCustom style={styleCustom.buttonText} fontWeight="bold" size="h3">
+          {title}
+        </TextCustom>
+      )}
     </TouchableOpacity>
   );
 };
