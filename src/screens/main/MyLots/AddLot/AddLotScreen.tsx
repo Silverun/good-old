@@ -1,12 +1,11 @@
-import { useNavigation } from "@react-navigation/native";
-import { View, Text } from "react-native";
-import { MainTabsNavigationProp } from "../../../../navigation/main/Main.types";
-import { useEffect, useLayoutEffect } from "react";
+import { View } from "react-native";
+import { styles } from "./AddLotScreen.styles";
+import { AddImages } from "../../../../components/presentation";
 
 export const AddLotScreen = () => {
   return (
-    <View>
-      <Text>AddLotScreen</Text>
+    <View style={styles.container}>
+      <AddImages />
     </View>
   );
 };
