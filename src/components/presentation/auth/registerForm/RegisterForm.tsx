@@ -49,7 +49,7 @@ export const RegisterForm = () => {
   return (
     <View style={styles.container}>
       <RHFField
-        label={{ text: "First Name" }}
+        label={{ text: "First Name", style: styles.label }}
         controller={{
           name: "firstName",
           control,
@@ -66,7 +66,7 @@ export const RegisterForm = () => {
         error={{ errors }}
       />
       <RHFField
-        label={{ text: "Last Name" }}
+        label={{ text: "Last Name", style: styles.label }}
         controller={{
           name: "lastName",
           control,
@@ -83,7 +83,7 @@ export const RegisterForm = () => {
         error={{ errors }}
       />
       <RHFField
-        label={{ text: "Email" }}
+        label={{ text: "Email", style: styles.label }}
         controller={{
           name: "email",
           control,
@@ -103,7 +103,7 @@ export const RegisterForm = () => {
         error={{ errors }}
       />
       <RHFField
-        label={{ text: "Password" }}
+        label={{ text: "Password", style: styles.label }}
         controller={{
           name: "password",
           control,
@@ -122,6 +122,7 @@ export const RegisterForm = () => {
         error={{ errors }}
       />
       <ButtonCustom
+        style={styles.button}
         loading={isSubmitting}
         title="Register"
         onPress={handleSubmit(signUp)}

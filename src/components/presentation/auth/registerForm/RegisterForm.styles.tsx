@@ -6,10 +6,9 @@ export const styles = StyleSheet.create({
     flex: 1,
     width: WIDTH.sixty,
     justifyContent: "center",
-    alignItems: "center",
   },
   label: {
-    marginBottom: 5,
+    alignSelf: "center",
   },
   input: {
     padding: 10,
@@ -19,5 +18,9 @@ export const styles = StyleSheet.create({
   error: {
     color: "red",
     marginBottom: 10,
+  },
+  button: {
+    alignSelf: "center",
+    marginTop: 20,
   },
 });

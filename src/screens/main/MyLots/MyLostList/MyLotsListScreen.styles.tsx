@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { WIDTH } from "../../../../constants";
+import { FONTS_SIZES, WIDTH } from "../../../../constants";
 
 export const styles = StyleSheet.create({
   container: {
@@ -14,5 +14,9 @@ export const styles = StyleSheet.create({
     right: 20,
     alignItems: "center",
     justifyContent: "center",
+    paddingHorizontal: 0,
+  },
+  add_button_text: {
+    fontSize: 30,
   },
 });

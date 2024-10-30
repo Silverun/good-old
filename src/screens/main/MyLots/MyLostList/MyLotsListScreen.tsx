@@ -12,8 +12,8 @@ export const MyLotsListScreen = ({ navigation }: MyLotsScreenProps) => {
   return (
     <View style={styles.container}>
       <Text>MyLotsScreen</Text>
-
       <ButtonCustom
+        textStyle={styles.add_button_text}
         style={styles.add_button}
         title="+"
         onPress={addLotHandler}

@@ -8,6 +8,9 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     padding: 20,
   },
+  label: {
+    alignSelf: "center",
+  },
   input: {
     width: WIDTH.fifty,
   },

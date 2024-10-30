@@ -3,6 +3,8 @@ import { View, TouchableOpacity, Text, Image, ScrollView } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { styles } from "./AddImages.styles";
 import { AddImagesModal } from "./AddImagesModal";
+import { RHFField } from "../../../../../common";
+import { useForm } from "react-hook-form";
 
 const MAX_IMAGES = 5;
 
@@ -56,7 +58,7 @@ export const AddImages = () => {
   };
 
   return (
-    <View style={{ flex: 1 }}>
+    <View>
       <View style={styles.carouselContainer}>
         <ScrollView horizontal>
           {images.map((item, index) => (

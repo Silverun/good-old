@@ -10,6 +10,7 @@ import {
   TextInputCustom,
   TextInputCustomProps,
 } from "../input/TextInputCustom";
+import { View } from "react-native";
 
 type ControllerRenderOptional<T extends FieldValues> = Partial<
   ControllerProps<T>
@@ -45,7 +46,7 @@ export const RHFField = <TFieldValues extends FieldValues>({
   const { errors, style: errorStyle } = error;
 
   return (
-    <>
+    <View>
       <TextCustom style={[styles.label, style]}>{text}</TextCustom>
       <Controller
         control={control}
@@ -72,6 +73,6 @@ export const RHFField = <TFieldValues extends FieldValues>({
           {errors[name]?.message as string}
         </TextCustom>
       )}
-    </>
+    </View>
   );
 };

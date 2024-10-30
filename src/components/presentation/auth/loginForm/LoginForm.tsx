@@ -32,7 +32,7 @@ export const LoginForm = () => {
   return (
     <View style={styles.container}>
       <RHFField
-        label={{ text: "Email" }}
+        label={{ text: "Email", style: styles.label }}
         controller={{
           name: "email",
           control,
@@ -47,7 +47,7 @@ export const LoginForm = () => {
         error={{ errors }}
       />
       <RHFField
-        label={{ text: "Password" }}
+        label={{ text: "Password", style: styles.label }}
         controller={{
           name: "password",
           control,

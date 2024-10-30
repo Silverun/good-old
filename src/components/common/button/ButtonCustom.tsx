@@ -9,17 +9,19 @@ import {
 import { createStyle } from "./ButtonCustom.styles";
 import { useAppSelector } from "../../../hooks/useRedux";
 import { Loader } from "../loader/Loader";
-import { TextCustom } from "../text/TextCustom";
+import { TextCustom, TextCustomProps } from "../text/TextCustom";
 
 interface ButtonCustomProps extends TouchableOpacityProps {
   title: string;
   loading?: boolean;
+  textStyle?: TextCustomProps["style"];
 }
 
 export const ButtonCustom = ({
   title,
   loading,
   style,
+  textStyle,
   ...props
 }: ButtonCustomProps) => {
   const theme = useAppSelector((state) => state.theme.theme);
@@ -30,7 +32,11 @@ export const ButtonCustom = ({
       {loading ? (
         <Loader size="small" />
       ) : (
-        <TextCustom style={styleCustom.buttonText} fontWeight="bold" size="h3">
+        <TextCustom
+          style={[styleCustom.buttonText, textStyle]}
+          fontWeight="bold"
+          size="h3"
+        >
           {title}
         </TextCustom>
       )}

@@ -28,5 +28,6 @@ const styles = (theme: Theme) =>
       backgroundColor: theme.inputBackground,
       color: theme.textColor,
       fontFamily: FONT_FAMILIES.regular,
+      paddingLeft: 10,
     },
   });
