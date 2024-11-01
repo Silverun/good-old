@@ -64,6 +64,7 @@ const dark: Theme = {
   background: PALLETTE.dark_green,
   inputBackground: PALLETTE.black,
   placeholderTextColor: PALLETTE.battleship_gray,
+  buttonBackground: PALLETTE.moss_green_darker,
   buttonTextColor: PALLETTE.black,
 };
 

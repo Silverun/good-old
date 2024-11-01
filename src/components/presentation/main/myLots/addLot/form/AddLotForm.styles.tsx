@@ -27,4 +27,8 @@ export const stylesThemed = (theme: Theme) =>
     desc_text: {
       textAlignVertical: "top",
     },
+    submit_button: {
+      marginTop: 10,
+      alignSelf: "flex-end",
+    },
   });

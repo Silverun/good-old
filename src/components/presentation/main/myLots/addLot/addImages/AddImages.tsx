@@ -1,19 +1,28 @@
 import React, { useState } from "react";
-import { View, TouchableOpacity, Text, Image, ScrollView } from "react-native";
+import {
+  View,
+  TouchableOpacity,
+  Text,
+  Image,
+  ScrollView,
+  Modal,
+} from "react-native";
 import * as ImagePicker from "expo-image-picker";
-import { styles } from "./AddImages.styles";
-import { AddImagesModal } from "./AddImagesModal";
-import { RHFField } from "../../../../../common";
-import { useForm } from "react-hook-form";
+import { useThemeCustom } from "../../../../../../hooks";
+import { Ionicons } from "@expo/vector-icons";
+import { stylesThemed } from "./AddImages.styles";
+import { TextCustom } from "../../../../../common";
 
-const MAX_IMAGES = 5;
+interface AddImagesProps {
+  images: string[];
+  setImages: React.Dispatch<React.SetStateAction<string[]>>;
+}
 
-export const AddImages = () => {
-  const [images, setImages] = useState<(string | null)[]>(
-    Array(MAX_IMAGES).fill(null)
-  );
+export const AddImages = ({ images, setImages }: AddImagesProps) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const { theme } = useThemeCustom();
+  const styles = stylesThemed(theme);
 
   const openModal = (index: number) => {
     setSelectedIndex(index);
@@ -59,32 +68,46 @@ export const AddImages = () => {
 
   return (
     <View>
-      <View style={styles.carouselContainer}>
-        <ScrollView horizontal>
-          {images.map((item, index) => (
-            <TouchableOpacity
-              key={index}
-              style={[
-                styles.imageContainer,
-                item ? styles.imageFilled : styles.imageEmpty,
-              ]}
-              onPress={() => openModal(index)}
+      <TextCustom>Lot images</TextCustom>
+      <ScrollView contentContainerStyle={styles.carouselContainer} horizontal>
+        {images.map((item, index) => (
+          <TouchableOpacity
+            key={index}
+            style={styles.imageContainer}
+            onPress={() => openModal(index)}
+          >
+            {item ? (
+              <Image source={{ uri: item }} style={styles.image} />
+            ) : (
+              <Text style={styles.addButtonText}>+</Text>
+            )}
+          </TouchableOpacity>
+        ))}
+      </ScrollView>
+      <Modal transparent visible={isModalVisible} onRequestClose={closeModal}>
+        <TouchableOpacity style={styles.modal_overlay} onPress={closeModal}>
+          <View style={styles.modalContainer}>
+            <Ionicons.Button
+              name="camera-outline"
+              onPress={pickFromCamera}
+              size={24}
+              color={theme.buttonTextColor}
+              backgroundColor={theme.buttonBackground}
             >
-              {item ? (
-                <Image source={{ uri: item }} style={styles.image} />
-              ) : (
-                <Text style={styles.addButtonText}>+</Text>
-              )}
-            </TouchableOpacity>
-          ))}
-        </ScrollView>
-      </View>
-      <AddImagesModal
-        closeModal={closeModal}
-        isModalVisible={isModalVisible}
-        pickFromCamera={pickFromCamera}
-        pickFromGallery={pickFromGallery}
-      />
+              Camera
+            </Ionicons.Button>
+            <Ionicons.Button
+              name="image-outline"
+              onPress={pickFromGallery}
+              size={24}
+              color={theme.buttonTextColor}
+              backgroundColor={theme.buttonBackground}
+            >
+              Gallery
+            </Ionicons.Button>
+          </View>
+        </TouchableOpacity>
+      </Modal>
     </View>
   );
 };

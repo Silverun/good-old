@@ -15,6 +15,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     paddingHorizontal: 0,
+    paddingVertical: 0,
   },
   add_button_text: {
     fontSize: 30,

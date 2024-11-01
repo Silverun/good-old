@@ -1,0 +1,3 @@
+
+Add lot screen:
+ Check errors and add loading state to lot upload

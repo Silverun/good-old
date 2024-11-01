@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import * as NavigationBar from "expo-navigation-bar";
 import { View, StyleSheet, ViewProps } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { DarkModeSwitch } from "../settings/DarkModeSwitch";
@@ -11,6 +12,10 @@ interface RootLayoutProps extends ViewProps {}
 export const RootLayout = ({ children }: RootLayoutProps) => {
   const { theme, isDarkTheme } = useThemeCustom();
   const insets = useSafeAreaInsets();
+
+  useEffect(() => {
+    NavigationBar.setBackgroundColorAsync(theme.navigator.colors.card);
+  }, [isDarkTheme]);
 
   return (
     <View

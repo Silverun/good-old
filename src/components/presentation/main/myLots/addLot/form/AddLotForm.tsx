@@ -1,30 +1,49 @@
 import { View } from "react-native";
-import { RHFField, TextCustom } from "../../../../../common";
-import { useForm } from "react-hook-form";
+import { ButtonCustom, RHFField, TextCustom } from "../../../../../common";
+import { useForm, UseFormReturn } from "react-hook-form";
 import { stylesThemed } from "./AddLotForm.styles";
 import { Picker } from "@react-native-picker/picker";
 import { useState } from "react";
 import { useThemeCustom } from "../../../../../../hooks";
 import { LOT_CATEGORIES, LotCategory } from "../../../../../../constants";
 
-interface AddLotFormData {
+export interface AddLotFormData {
   title: string;
-  category: string;
   description: string;
   price: number;
-  imagesUrls: string[];
 }
 
-export const AddLotForm = () => {
-  const [selectedCategory, setSelectedCategory] = useState<LotCategory>();
+export interface FullLotFormData extends AddLotFormData {
+  category: LotCategory;
+}
+
+interface AddLotFormProps {
+  onSubmitPress: (data: FullLotFormData) => void;
+}
+
+export const AddLotForm = ({ onSubmitPress }: AddLotFormProps) => {
+  const [selectedCategory, setSelectedCategory] = useState<LotCategory>(
+    LOT_CATEGORIES[0]
+  );
   const { theme } = useThemeCustom();
   const styles = stylesThemed(theme);
 
   const {
-    control,
     handleSubmit,
+    control,
     formState: { errors, isSubmitting },
   } = useForm<AddLotFormData>();
+
+  const handleSubmitLot = () => {
+    handleSubmit((data) => {
+      const fullFormData = {
+        ...data,
+        category: selectedCategory,
+      };
+
+      onSubmitPress(fullFormData);
+    })();
+  };
 
   return (
     <View style={styles.container}>
@@ -82,6 +101,28 @@ export const AddLotForm = () => {
           style: styles.desc_text,
         }}
         error={{ errors }}
+      />
+      <RHFField
+        label={{ text: "Price" }}
+        controller={{
+          name: "price",
+          control,
+          rules: {
+            required: "Price is required",
+            minLength: {
+              value: 1,
+              message: "Lot price should be at least 1 character",
+            },
+          },
+        }}
+        input={{ placeholder: "Specify lot price", keyboardType: "numeric" }}
+        error={{ errors }}
+      />
+      <ButtonCustom
+        style={styles.submit_button}
+        title="Add lot"
+        onPress={handleSubmitLot}
+        loading={isSubmitting}
       />
     </View>
   );
