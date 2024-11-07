@@ -1,11 +1,15 @@
 import { View } from "react-native";
 import { ButtonCustom, RHFField, TextCustom } from "../../../../../common";
-import { useForm, UseFormReturn } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { stylesThemed } from "./AddLotForm.styles";
 import { Picker } from "@react-native-picker/picker";
 import { useState } from "react";
 import { useThemeCustom } from "../../../../../../hooks";
 import { LOT_CATEGORIES, LotCategory } from "../../../../../../constants";
+import { AddLotImages } from "../../../../../../screens";
+import { storageService } from "../../../../../../services/storage/storageService";
+import { useLotImages } from "../../../../../../screens/main/MyLots/AddLot/hooks/useLotImages";
+import { LotData } from "../../../../../../services/database/databaseService";
 
 export interface AddLotFormData {
   title: string;
@@ -18,15 +22,16 @@ export interface FullLotFormData extends AddLotFormData {
 }
 
 interface AddLotFormProps {
-  onSubmitPress: (data: FullLotFormData) => void;
+  images: AddLotImages;
 }
 
-export const AddLotForm = ({ onSubmitPress }: AddLotFormProps) => {
+export const AddLotForm = ({ images }: AddLotFormProps) => {
   const [selectedCategory, setSelectedCategory] = useState<LotCategory>(
     LOT_CATEGORIES[0]
   );
   const { theme } = useThemeCustom();
   const styles = stylesThemed(theme);
+  const { uploadLotImages } = useLotImages();
 
   const {
     handleSubmit,
@@ -34,15 +39,16 @@ export const AddLotForm = ({ onSubmitPress }: AddLotFormProps) => {
     formState: { errors, isSubmitting },
   } = useForm<AddLotFormData>();
 
-  const handleSubmitLot = () => {
-    handleSubmit((data) => {
-      const fullFormData = {
+  const handleSubmitLot = async () => {
+    handleSubmit(async (data) => {
+      const imagesUrls = await uploadLotImages(images);
+      const fullFormData: LotData = {
         ...data,
         category: selectedCategory,
+        imageUrls: imagesUrls,
+        userId: 1,
       };
-
-      onSubmitPress(fullFormData);
-    })();
+    });
   };
 
   return (

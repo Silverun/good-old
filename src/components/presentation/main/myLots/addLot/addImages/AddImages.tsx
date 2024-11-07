@@ -12,10 +12,11 @@ import { useThemeCustom } from "../../../../../../hooks";
 import { Ionicons } from "@expo/vector-icons";
 import { stylesThemed } from "./AddImages.styles";
 import { TextCustom } from "../../../../../common";
+import { AddLotImages } from "../../../../../../screens";
 
 interface AddImagesProps {
-  images: string[];
-  setImages: React.Dispatch<React.SetStateAction<string[]>>;
+  images: AddLotImages;
+  setImages: React.Dispatch<React.SetStateAction<AddLotImages>>;
 }
 
 export const AddImages = ({ images, setImages }: AddImagesProps) => {
