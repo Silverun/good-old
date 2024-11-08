@@ -9,7 +9,10 @@ import { LOT_CATEGORIES, LotCategory } from "../../../../../../constants";
 import { AddLotImages } from "../../../../../../screens";
 import { storageService } from "../../../../../../services/storage/storageService";
 import { useLotImages } from "../../../../../../screens/main/MyLots/AddLot/hooks/useLotImages";
-import { LotData } from "../../../../../../services/database/databaseService";
+import {
+  databaseService,
+  LotData,
+} from "../../../../../../services/database/databaseService";
 
 export interface AddLotFormData {
   title: string;
@@ -39,16 +42,17 @@ export const AddLotForm = ({ images }: AddLotFormProps) => {
     formState: { errors, isSubmitting },
   } = useForm<AddLotFormData>();
 
-  const handleSubmitLot = async () => {
-    handleSubmit(async (data) => {
-      const imagesUrls = await uploadLotImages(images);
-      const fullFormData: LotData = {
-        ...data,
-        category: selectedCategory,
-        imageUrls: imagesUrls,
-        userId: 1,
-      };
-    });
+  const onLotSubmit = async (data: AddLotFormData) => {
+    console.log("Submitting");
+    const imagesUrls = await uploadLotImages(images);
+    const fullFormData: LotData = {
+      ...data,
+      category: selectedCategory,
+      imageUrls: imagesUrls,
+      userId: 1,
+    };
+
+    await databaseService.addNewLot(fullFormData);
   };
 
   return (
@@ -127,8 +131,9 @@ export const AddLotForm = ({ images }: AddLotFormProps) => {
       <ButtonCustom
         style={styles.submit_button}
         title="Add lot"
-        onPress={handleSubmitLot}
+        onPress={handleSubmit(onLotSubmit)}
         loading={isSubmitting}
+        disabled={isSubmitting}
       />
     </View>
   );

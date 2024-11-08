@@ -1,19 +1,26 @@
-import { View, ActivityIndicator } from "react-native";
+import { View, ActivityIndicator, ViewProps } from "react-native";
+import { LoadingIndicator } from "./LoadingIndicator";
 
-type LoaderProps = {
+interface LoaderProps extends ViewProps {
   size: "large" | "small";
-};
+  color: string;
+}
 
-export const Loader = ({ size }: LoaderProps) => {
+export const Loader = ({ size, color, ...props }: LoaderProps) => {
   return (
     <View
-      style={{
-        alignItems: "center",
-        justifyContent: "center",
-        flex: 1,
-      }}
+      {...props}
+      style={[
+        {
+          alignItems: "center",
+          justifyContent: "center",
+          flex: 1,
+        },
+        props.style,
+      ]}
     >
-      <ActivityIndicator size={size} />
+      <LoadingIndicator width={10} height={10} color={color} />
+      {/* <ActivityIndicator color={"blue"} size={size} /> */}
     </View>
   );
 };

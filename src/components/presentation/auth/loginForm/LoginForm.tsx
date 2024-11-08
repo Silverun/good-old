@@ -63,6 +63,7 @@ export const LoginForm = () => {
       <ButtonCustom
         style={styles.loginButton}
         loading={isSubmitting}
+        disabled={isSubmitting}
         title="Login"
         onPress={handleSubmit(login)}
       />

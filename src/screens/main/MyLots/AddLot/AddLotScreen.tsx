@@ -1,14 +1,9 @@
 import { View } from "react-native";
 import { styles } from "./AddLotScreen.styles";
 import { AddImages } from "../../../../components/presentation";
-import {
-  AddLotForm,
-  FullLotFormData,
-} from "../../../../components/presentation/main/myLots/addLot/form/AddLotForm";
+import { AddLotForm } from "../../../../components/presentation/main/myLots/addLot/form/AddLotForm";
 import { MAX_IMAGES } from "../../../../constants";
 import { useState } from "react";
-import firestore from "@react-native-firebase/firestore";
-import { useLotImages } from "./hooks/useLotImages";
 
 export type AddLotImages = (string | null)[];
 
