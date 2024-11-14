@@ -5,7 +5,6 @@ import {
   TouchableOpacityProps,
 } from "react-native";
 import { createStyle } from "./ButtonCustom.styles";
-import { Loader } from "../loader/Loader";
 import { TextCustom, TextCustomProps } from "../text/TextCustom";
 import { useThemeCustom } from "../../../hooks";
 import { useState } from "react";
