@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { View, StyleSheet } from "react-native";
 import IndicatorItem from "./IndicatorItem";
 import { LOADER_CONF } from "./loader";
@@ -18,6 +18,7 @@ export const LoadingIndicator = ({
 }: LoadingIndicatorProps) => {
   const dotRadius = height / 3;
   const speed = LOADER_CONF.speed;
+  const totalTime = speed * count;
 
   const items = Array(count).fill(null);
 

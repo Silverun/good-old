@@ -7,7 +7,9 @@ import Animated, {
   Easing,
   withDelay,
   withSequence,
+  runOnJS,
 } from "react-native-reanimated";
+import { AnimatedView } from "react-native-reanimated/lib/typescript/reanimated2/component/View";
 
 interface IndicatorItemProps {
   size: number;
@@ -25,7 +27,6 @@ const IndicatorItem = ({
   speed,
 }: IndicatorItemProps) => {
   const posY = useSharedValue(0);
-
   const ttf = speed * 2 * (count + index);
 
   const goUp = withTiming(-size, {
@@ -33,26 +34,29 @@ const IndicatorItem = ({
     easing: Easing.linear,
   });
 
-  const goDown = withTiming(0, {
-    duration: speed,
-    easing: Easing.linear,
-  });
+  const goDown = withTiming(
+    0,
+    {
+      duration: speed,
+      easing: Easing.linear,
+    },
+    () => runOnJS(replay)()
+  );
 
   const moveSeq = withSequence(goUp, goDown);
   const delayedSeq = withDelay(speed * 2 * index, moveSeq);
 
   const runAnim = () => {
-    posY.value = delayedSeq;
+    return (posY.value = delayedSeq);
   };
 
+  function replay() {
+    console.log("replay", index);
+  }
+
   useEffect(() => {
-    console.log("Effect ran");
     console.log(index, ttf);
     runAnim();
-    const int = setInterval(() => {
-      runAnim();
-    }, ttf);
-    return () => clearInterval(int);
   }, []);
 
   const animatedStyle = useAnimatedStyle(() => {

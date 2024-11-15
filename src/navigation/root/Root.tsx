@@ -4,14 +4,14 @@ import { RootStackParamList } from "./Root.types";
 import MainNavigation from "../main/Main";
 import AuthNavigation from "../auth/Auth";
 import { useAuth } from "../../hooks";
-import { Loader } from "../../components/common";
+import { Text } from "react-native";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const RootNavigation = () => {
   const { user, initializing } = useAuth();
 
-  if (initializing) return <Loader size="large" />;
+  if (initializing) return <Text>Loading</Text>;
 
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>

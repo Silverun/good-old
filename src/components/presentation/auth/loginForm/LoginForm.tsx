@@ -20,7 +20,6 @@ export const LoginForm = () => {
 
   const login = async (data: LoginFormData) => {
     const { email, password } = data;
-    console.log(email, password);
     try {
       await auth().signInWithEmailAndPassword(email, password);
     } catch (e: unknown) {
