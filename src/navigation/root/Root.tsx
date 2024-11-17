@@ -4,17 +4,27 @@ import { RootStackParamList } from "./Root.types";
 import MainNavigation from "../main/Main";
 import AuthNavigation from "../auth/Auth";
 import { useAuth } from "../../hooks";
-import { Text } from "react-native";
+import { View } from "react-native";
+import { Loader } from "../../components/common";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const RootNavigation = () => {
   const { user, initializing } = useAuth();
 
-  if (initializing) return <Text>Loading</Text>;
+  if (initializing)
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <Loader />
+      </View>
+    );
 
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
       {user ? (
         <Stack.Screen name={RootRoutes.main} component={MainNavigation} />
       ) : (

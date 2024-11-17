@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import { View, StyleSheet } from "react-native";
 import IndicatorItem from "./IndicatorItem";
 import { LOADER_CONF } from "./loader";
+import { useThemeCustom } from "../../../hooks";
 
-interface LoadingIndicatorProps {
+export interface LoadingIndicatorProps {
   width?: number;
   height?: number;
   color?: string;
@@ -13,14 +14,23 @@ interface LoadingIndicatorProps {
 export const LoadingIndicator = ({
   width = 200,
   height = 100,
-  color = "#000",
+  color,
   count = 3,
 }: LoadingIndicatorProps) => {
+  const [activeIndex, setActiveIndex] = useState(0);
   const dotRadius = height / 3;
   const speed = LOADER_CONF.speed;
-  const totalTime = speed * count;
+  const switchDelay = speed * 2;
+  const { theme } = useThemeCustom();
+  const colorOverride = color ? color : theme.textColor;
 
-  const items = Array(count).fill(null);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev === count - 1 ? 0 : prev + 1));
+    }, switchDelay);
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <View style={[styles.container, { width, height }]}>
@@ -29,11 +39,10 @@ export const LoadingIndicator = ({
         .map((_, index) => (
           <IndicatorItem
             key={index}
-            color={color}
+            color={colorOverride}
             size={dotRadius}
-            index={index}
-            count={count}
             speed={speed}
+            isActive={activeIndex === index}
           />
         ))}
     </View>

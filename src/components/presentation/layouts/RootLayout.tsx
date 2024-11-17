@@ -44,6 +44,8 @@ const styles = (theme: Theme) =>
   StyleSheet.create({
     container: {
       flex: 1,
+      // justifyContent: "center",
+      // alignItems: "center",
       position: "relative", // DELETE AFTER
       backgroundColor: theme.background,
     },

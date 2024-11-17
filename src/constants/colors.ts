@@ -9,6 +9,7 @@ export type Theme = {
   inputBackground?: string;
   inputBorderColor: string;
   placeholderTextColor: string;
+  loader: string;
 };
 
 const PALLETTE = {
@@ -45,6 +46,7 @@ const light: Theme = {
   buttonTextColor: PALLETTE.cornsilk,
   inputBorderColor: PALLETTE.moss_green,
   placeholderTextColor: PALLETTE.silver,
+  loader: PALLETTE.moss_green,
 };
 
 const dark: Theme = {
