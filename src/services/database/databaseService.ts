@@ -3,6 +3,12 @@ import { CloudFirestoreService } from "./cloudFirestore";
 
 export interface IDatabaseService {
   addNewLot: (data: LotData) => Promise<void>;
+  getLots: () => Promise<Lot[]>;
+  subscribeToLots: (
+    onUpdate: (lots: Lot[]) => void,
+    onError: (error: Error) => void,
+    userId?: number
+  ) => () => void;
 }
 
 export interface LotData {
@@ -14,6 +20,10 @@ export interface LotData {
   userId: number;
 }
 
+export interface Lot extends LotData {
+  id: string;
+}
+
 class DatabaseService {
   private databaseService: IDatabaseService;
 
@@ -23,6 +33,17 @@ class DatabaseService {
 
   async addNewLot(data: LotData) {
     this.databaseService.addNewLot(data);
+  }
+  async getLots() {
+    return this.databaseService.getLots();
+  }
+
+  subscribeToLots(
+    onUpdate: (lots: Lot[]) => void,
+    onError: (error: Error) => void,
+    userId?: number
+  ) {
+    return this.databaseService.subscribeToLots(onUpdate, onError, userId);
   }
 }
 

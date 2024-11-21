@@ -1,10 +1,11 @@
 import { StyleSheet, View } from "react-native";
 import { Loader } from "../../../components/common/";
+import { LotsList } from "../../../components/presentation/main/lots/lotsList/LotsList";
 
 const LotsScreen = () => {
   return (
     <View style={styles.container}>
-      <Loader />
+      <LotsList />
     </View>
   );
 };
