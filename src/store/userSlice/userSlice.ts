@@ -1,3 +1,4 @@
+import { FirebaseFirestoreTypes } from "@react-native-firebase/firestore";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface User {
@@ -7,6 +8,7 @@ export interface User {
   image: string | null;
   email: string;
   credits: number;
+  createdAt: string;
 }
 
 export interface UserState {
@@ -23,20 +25,17 @@ export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    setActiveUser: (state, action: PayloadAction<User | null>) => {
-      if (action.payload === null) {
-        state = initialState;
-      }
+    setActiveUser: (state, action: PayloadAction<User>) => {
       state.user = action.payload;
       state.isLoggedIn = true;
     },
-    logOut: (state) => {
-      s;
+    clearActiveUser: (state) => {
+      console.log("clearActiveUser");
       state = initialState;
     },
   },
 });
 
-export const { logIn, logOut } = userSlice.actions;
+export const { setActiveUser, clearActiveUser } = userSlice.actions;
 
 export const userReducer = userSlice.reducer;

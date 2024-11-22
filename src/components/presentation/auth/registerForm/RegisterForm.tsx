@@ -8,8 +8,9 @@ import { USER } from "../../../../constants";
 import { ReactNativeFirebase } from "@react-native-firebase/app";
 import { ButtonCustom, RHFField } from "../../../common";
 import { VALID_NAME } from "../../../../constants/locales";
+import { userService } from "../../../../services/database/user/userService";
 
-interface RegisterFormData {
+export interface RegisterFormData {
   firstName: string;
   lastName: string;
   email: string;
@@ -24,25 +25,12 @@ export const RegisterForm = () => {
   } = useForm<RegisterFormData>();
 
   const signUp = async (data: RegisterFormData) => {
-    const { email, password, lastName, firstName } = data;
-
     try {
-      const { user } = await auth().createUserWithEmailAndPassword(
-        email,
-        password
-      );
-
-      firestore().collection("users").doc(user?.uid).set({
-        firstName,
-        lastName,
-        email,
-        credits: USER.default_credits,
-        image: null,
-        createdAt: firestore.FieldValue.serverTimestamp(),
-      });
-    } catch (e: unknown) {
-      const err = e as ReactNativeFirebase.NativeFirebaseError;
-      alert("Registration failed: " + err.message);
+      await userService.addUser(data);
+    } catch (error) {
+      if (error instanceof Error) {
+        alert(error.message);
+      }
     }
   };
 

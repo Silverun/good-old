@@ -1,10 +1,9 @@
 import React from "react";
-import { Button, View } from "react-native";
+import { View } from "react-native";
 import { useForm } from "react-hook-form";
-import auth from "@react-native-firebase/auth";
-import { ReactNativeFirebase } from "@react-native-firebase/app";
 import { styles } from "./LoginForm.styles";
 import { ButtonCustom, RHFField } from "../../../common";
+import { userService } from "../../../../services/database/user/userService";
 
 interface LoginFormData {
   email: string;
@@ -19,13 +18,20 @@ export const LoginForm = () => {
   } = useForm<LoginFormData>();
 
   const login = async (data: LoginFormData) => {
-    const { email, password } = data;
     try {
-      await auth().signInWithEmailAndPassword(email, password);
-    } catch (e: unknown) {
-      const err = e as ReactNativeFirebase.NativeFirebaseError;
-      alert("Login failed: " + err.message);
+      await userService.loginUser(data);
+    } catch (error) {
+      if (error instanceof Error) {
+        alert(error.message);
+      }
     }
+    // const { email, password } = data;
+    // try {
+    //   await auth().signInWithEmailAndPassword(email, password);
+    // } catch (e: unknown) {
+    //   const err = e as ReactNativeFirebase.NativeFirebaseError;
+    //   alert("Login failed: " + err.message);
+    // }
   };
 
   return (

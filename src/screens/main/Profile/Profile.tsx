@@ -1,13 +1,16 @@
 import { View, Text, StyleSheet, Button } from "react-native";
-import auth from "@react-native-firebase/auth";
+import { userService } from "../../../services/database/user/userService";
+import { useAppDispatch } from "../../../hooks";
+import { clearActiveUser } from "../../../store/userSlice/userSlice";
 
 const ProfileScreen = () => {
+  const dispatch = useAppDispatch();
   const signOutUser = async () => {
     try {
-      await auth().signOut();
-      console.log("User signed out!");
+      await userService.logoutUser();
+      dispatch(clearActiveUser());
     } catch (error) {
-      console.error("Error signing out: ", error);
+      alert(error);
     }
   };
 
