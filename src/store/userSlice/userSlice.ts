@@ -1,4 +1,3 @@
-import { FirebaseFirestoreTypes } from "@react-native-firebase/firestore";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface User {
@@ -27,7 +26,6 @@ export const userSlice = createSlice({
       state.user = action.payload;
     },
     clearActiveUser: (state) => {
-      console.log("Clearing active user redux");
       state.user = null;
     },
   },

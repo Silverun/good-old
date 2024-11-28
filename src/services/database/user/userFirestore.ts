@@ -2,12 +2,12 @@ import firestore, {
   FirebaseFirestoreTypes,
 } from "@react-native-firebase/firestore";
 import {
-  AuthChangeFunc,
+  AuthHandlerFunc,
   IUserService,
   loginUserData,
   newUserRegData,
 } from "./userService";
-import auth, { FirebaseAuthTypes } from "@react-native-firebase/auth";
+import auth from "@react-native-firebase/auth";
 import { USER } from "../../../constants";
 import { ReactNativeFirebase } from "@react-native-firebase/app";
 import { FirestoreCollections } from "../cloudFirestore";
@@ -37,8 +37,14 @@ export class UserFirestore implements IUserService {
     }
   }
 
-  authChangeHandler<T>(handler: AuthChangeFunc<T>) {
-    auth().onAuthStateChanged((user) => handler(user as T));
+  authChangeHandler(handler: AuthHandlerFunc) {
+    return auth().onAuthStateChanged((user) => {
+      if (user) {
+        handler(user.uid);
+      } else {
+        handler(null);
+      }
+    });
   }
 
   async loginUser(userData: loginUserData) {
@@ -55,7 +61,6 @@ export class UserFirestore implements IUserService {
   async logoutUser() {
     try {
       await auth().signOut();
-      console.log("User signed out, from firebase!");
     } catch (error) {
       const err = error as ReactNativeFirebase.NativeFirebaseError;
       console.error("Firebase error: ", err);

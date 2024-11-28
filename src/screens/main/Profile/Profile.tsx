@@ -1,9 +1,11 @@
 import { View, Text, StyleSheet, Button } from "react-native";
 import { userService } from "../../../services/database/user/userService";
-import { useAppDispatch } from "../../../hooks";
-import { clearActiveUser } from "../../../store/userSlice/userSlice";
+import { useAppSelector } from "../../../hooks";
+import { TextCustom } from "../../../components/common";
 
 const ProfileScreen = () => {
+  const { user } = useAppSelector((state) => state.user);
+
   const signOutUser = async () => {
     try {
       await userService.logoutUser();
@@ -14,7 +16,8 @@ const ProfileScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Text>ProfileScreen</Text>
+      <TextCustom>{user?.firstName}</TextCustom>
+      <TextCustom>{user?.lastName}</TextCustom>
       <Button title="Sign out" onPress={signOutUser} color="red" />
     </View>
   );

@@ -1,4 +1,3 @@
-import { FirebaseAuthTypes } from "@react-native-firebase/auth";
 import { User } from "../../../store/userSlice/userSlice";
 import { userFirestore } from "./userFirestore";
 
@@ -14,14 +13,14 @@ export interface loginUserData {
   password: string;
 }
 
-export type AuthChangeFunc<T> = (user: T) => Promise<void>;
+export type AuthHandlerFunc = (userId: string | null) => Promise<void>;
 
 export interface IUserService {
   addUser: (userData: newUserRegData) => Promise<void>;
   loginUser: (userData: loginUserData) => Promise<void>;
   getUser: (id: string) => Promise<User | undefined>;
   logoutUser: () => Promise<void>;
-  authChangeHandler: <T>(handler: AuthChangeFunc<T>) => void;
+  authChangeHandler: (handler: AuthHandlerFunc) => () => void;
 }
 
 class UserService implements IUserService {
@@ -31,8 +30,8 @@ class UserService implements IUserService {
     this.userService = userService;
   }
 
-  authChangeHandler<T>(handler: AuthChangeFunc<T>) {
-    this.userService.authChangeHandler(handler);
+  authChangeHandler(handler: AuthHandlerFunc) {
+    return this.userService.authChangeHandler(handler);
   }
 
   async addUser(userData: newUserRegData) {
