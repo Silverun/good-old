@@ -13,12 +13,10 @@ export interface User {
 
 export interface UserState {
   user: User | null;
-  isLoggedIn: boolean;
 }
 
 const initialState: UserState = {
   user: null,
-  isLoggedIn: false,
 };
 
 export const userSlice = createSlice({
@@ -27,11 +25,10 @@ export const userSlice = createSlice({
   reducers: {
     setActiveUser: (state, action: PayloadAction<User>) => {
       state.user = action.payload;
-      state.isLoggedIn = true;
     },
     clearActiveUser: (state) => {
-      console.log("clearActiveUser");
-      state = initialState;
+      console.log("Clearing active user redux");
+      state.user = null;
     },
   },
 });

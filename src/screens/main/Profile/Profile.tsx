@@ -4,11 +4,9 @@ import { useAppDispatch } from "../../../hooks";
 import { clearActiveUser } from "../../../store/userSlice/userSlice";
 
 const ProfileScreen = () => {
-  const dispatch = useAppDispatch();
   const signOutUser = async () => {
     try {
       await userService.logoutUser();
-      dispatch(clearActiveUser());
     } catch (error) {
       alert(error);
     }

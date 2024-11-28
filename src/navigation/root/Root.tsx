@@ -10,15 +10,15 @@ import { Loader } from "../../components/common";
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const RootNavigation = () => {
-  const { userState, initializing } = useAuth();
-  const isLoggedIn = userState.isLoggedIn;
+  const { userAuth, initializing } = useAuth();
 
-  if (initializing)
+  if (initializing) {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         <Loader />
       </View>
     );
+  }
 
   return (
     <Stack.Navigator
@@ -26,7 +26,7 @@ const RootNavigation = () => {
         headerShown: false,
       }}
     >
-      {isLoggedIn ? (
+      {userAuth ? (
         <Stack.Screen name={RootRoutes.main} component={MainNavigation} />
       ) : (
         <Stack.Screen name={RootRoutes.auth} component={AuthNavigation} />

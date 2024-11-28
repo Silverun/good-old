@@ -1,33 +1,38 @@
 import auth, { FirebaseAuthTypes } from "@react-native-firebase/auth";
 import { useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "./useRedux";
+import { useAppDispatch } from "./useRedux";
 import { clearActiveUser, setActiveUser } from "../store/userSlice/userSlice";
-import { userService } from "../services/database/user/userService";
+import {
+  IUserService,
+  userService,
+} from "../services/database/user/userService";
 
 export const useAuth = () => {
-  const dispatch = useAppDispatch();
-  const userState = useAppSelector((state) => state.user);
   const [initializing, setInitializing] = useState(true);
+  const [userAuth, setUserAuth] = useState<FirebaseAuthTypes.User | null>(null);
 
-  const onAuthStateChanged = async (user: FirebaseAuthTypes.User | null) => {
+  const dispatch = useAppDispatch();
+
+  const onAuthStateChanged: Parameters<
+    IUserService["authChangeHandler"]
+  >[0] = async (user) => {
     if (user) {
+      setUserAuth(user);
       const res = await userService.getUser(user.uid);
+      console.log("User: ", res);
       dispatch(setActiveUser(res!));
-      console.log(userState);
     } else {
-      console.log("not logged in", userState);
+      setUserAuth(null);
+      dispatch(clearActiveUser());
     }
     if (initializing) setInitializing(false);
   };
 
   useEffect(() => {
-    console.log(userState);
+    // const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+    const subscriber = userService.authChangeHandler(onAuthStateChanged);
+    return subscriber;
   }, []);
 
-  useEffect(() => {
-    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
-    return () => subscriber();
-  }, []);
-
-  return { userState, initializing };
+  return { userAuth, initializing };
 };
