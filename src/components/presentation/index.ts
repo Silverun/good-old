@@ -4,3 +4,4 @@ export * from "./layouts/RootLayout";
 export * from "./settings/DarkModeSwitch";
 export * from "./main/myLots/addLot/addImages/AddImages";
 export * from "./main/myLots/addLot/form/AddLotForm";
+export * from "./main/profile/UserProfileInfo.tsx";

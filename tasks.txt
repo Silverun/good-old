@@ -1,6 +1,7 @@
 
 Add lot screen:
- Check errors and add loading state to lot upload
 
-
- Add async storage service
+- ! Check lot adding with ref to userId - string
+- Add async storage service
+- Lots item and list styling
+- ! 4mb per photo, check usage, downscale size when loading into storage

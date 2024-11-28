@@ -1,7 +1,8 @@
-import { View, Text, StyleSheet, Button } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { userService } from "../../../services/database/user/userService";
 import { useAppSelector } from "../../../hooks";
-import { TextCustom } from "../../../components/common";
+import { ButtonCustom } from "../../../components/common";
+import { UserProfileInfo } from "../../../components/presentation";
 
 const ProfileScreen = () => {
   const { user } = useAppSelector((state) => state.user);
@@ -14,13 +15,15 @@ const ProfileScreen = () => {
     }
   };
 
-  return (
-    <View style={styles.container}>
-      <TextCustom>{user?.firstName}</TextCustom>
-      <TextCustom>{user?.lastName}</TextCustom>
-      <Button title="Sign out" onPress={signOutUser} color="red" />
-    </View>
-  );
+  if (user)
+    return (
+      <View style={styles.container}>
+        <UserProfileInfo user={user} />
+        <View style={styles.buttonBlock}>
+          <ButtonCustom title="Sign Out" onPress={signOutUser} />
+        </View>
+      </View>
+    );
 };
 
 export default ProfileScreen;
@@ -28,7 +31,10 @@ export default ProfileScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    padding: 16,
+    justifyContent: "space-between",
+  },
+  buttonBlock: {
+    alignSelf: "center",
   },
 });

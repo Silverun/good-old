@@ -16,7 +16,6 @@ export const useAuth = () => {
     if (userId) {
       setUserAuth(true);
       const res = await userService.getUser(userId);
-      console.log("User: ", res);
       dispatch(setActiveUser(res!));
     } else {
       setUserAuth(false);

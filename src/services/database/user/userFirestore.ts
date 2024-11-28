@@ -79,6 +79,7 @@ export class UserFirestore implements IUserService {
         const createdAt = user.createdAt as FirebaseFirestoreTypes.Timestamp;
         const fullUser = {
           ...user,
+          userId: id,
           createdAt: createdAt.toDate().toISOString(),
         };
         return fullUser as User;

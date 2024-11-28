@@ -1,16 +1,26 @@
 import React from "react";
-import { View, Text, FlatList, StyleSheet, RefreshControl } from "react-native";
+import { View, Text, FlatList, StyleSheet } from "react-native";
 import { useLots } from "../../../../../hooks/useLots";
 import { Loader, TextCustom } from "../../../../common";
 import { LotItem } from "./LotItem";
 
-interface LotsListProps {}
+interface LotsListProps {
+  userId?: string;
+}
 
-export const LotsList = ({}: LotsListProps) => {
-  const { lots, loading, error } = useLots();
+export const LotsList = ({ userId }: LotsListProps) => {
+  const { lots, loading, error } = useLots(userId);
 
   if (loading) {
     return <Loader />;
+  }
+
+  if (lots?.length === 0) {
+    return (
+      <TextCustom size="h3" fontWeight="bold">
+        Nothing here yet
+      </TextCustom>
+    );
   }
 
   if (error) {
@@ -19,7 +29,6 @@ export const LotsList = ({}: LotsListProps) => {
 
   return (
     <View style={styles.container}>
-      <RefreshControl refreshing={false} />
       <FlatList
         data={lots}
         renderItem={({ item }) => <LotItem key={item.id} item={item} />}

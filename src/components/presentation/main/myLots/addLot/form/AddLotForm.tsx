@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { stylesThemed } from "./AddLotForm.styles";
 import { Picker } from "@react-native-picker/picker";
 import { useState } from "react";
-import { useAuth, useThemeCustom } from "../../../../../../hooks";
+import { useAppSelector, useThemeCustom } from "../../../../../../hooks";
 import { LOT_CATEGORIES, LotCategory } from "../../../../../../constants";
 import { AddLotImages } from "../../../../../../screens";
 import { useLotImages } from "../../../../../../screens/main/MyLots/AddLot/hooks/useLotImages";
@@ -12,6 +12,7 @@ import {
   databaseService,
   LotData,
 } from "../../../../../../services/database/databaseService";
+import { useNavigation } from "@react-navigation/native";
 
 export interface AddLotFormData {
   title: string;
@@ -31,10 +32,11 @@ export const AddLotForm = ({ images }: AddLotFormProps) => {
   const [selectedCategory, setSelectedCategory] = useState<LotCategory>(
     LOT_CATEGORIES[0]
   );
-  const { user } = useAuth();
   const { theme } = useThemeCustom();
   const styles = stylesThemed(theme);
   const { uploadLotImages } = useLotImages();
+  const { user } = useAppSelector((state) => state.user);
+  const { goBack } = useNavigation();
 
   const {
     handleSubmit,
@@ -48,10 +50,11 @@ export const AddLotForm = ({ images }: AddLotFormProps) => {
       ...data,
       category: selectedCategory,
       imageUrls: imagesUrls,
-      userId: 1,
+      userId: user!.userId,
     };
 
     await databaseService.addNewLot(fullFormData);
+    goBack();
   };
 
   return (
