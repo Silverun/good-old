@@ -1,27 +1,36 @@
 import React from "react";
-import { View, Text, Image, StyleSheet } from "react-native";
-import { Lot } from "../../../../../services/database/databaseService";
+import { View, Image, StyleSheet } from "react-native";
+import { Lot } from "../../../../../services/database/lots/lotsService";
+import { TextCustom } from "../../../../common";
+import { LotNoImage } from "./LotNoImage";
 
 interface LotItemProps {
   item: Lot;
 }
 
 export const LotItem = ({ item }: LotItemProps) => {
-  const { title, price, imageUrls } = item;
+  const { title, price, imageUrls, createdAt } = item;
   const firstImageUrl = imageUrls[0] || "";
+  const formattedDate = new Intl.DateTimeFormat("en-GB", {
+    dateStyle: "full",
+    timeStyle: "short",
+  }).format(new Date(createdAt));
 
   return (
     <View style={styles.container}>
       {firstImageUrl ? (
         <Image source={{ uri: firstImageUrl }} style={styles.image} />
       ) : (
-        <View style={styles.placeholder}>
-          <Text style={styles.placeholderText}>No Image</Text>
-        </View>
+        <LotNoImage />
       )}
       <View style={styles.textContainer}>
-        <Text style={styles.title}>{title}</Text>
-        <Text style={styles.price}>${price}</Text>
+        <TextCustom fontWeight="bold" size="h3">
+          {title}
+        </TextCustom>
+        <TextCustom size="h4">{price} $</TextCustom>
+        <TextCustom size="h5" fontWeight="light">
+          {formattedDate}
+        </TextCustom>
       </View>
     </View>
   );
@@ -30,40 +39,17 @@ export const LotItem = ({ item }: LotItemProps) => {
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
-    padding: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: "#ddd",
+    gap: 5,
   },
   image: {
-    width: 80,
-    height: 80,
+    width: 100,
+    height: 100,
     borderRadius: 8,
     marginRight: 10,
-  },
-  placeholder: {
-    width: 80,
-    height: 80,
-    borderRadius: 8,
-    marginRight: 10,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#f0f0f0",
-  },
-  placeholderText: {
-    fontSize: 12,
-    color: "#888",
   },
   textContainer: {
     flex: 1,
     justifyContent: "center",
-  },
-  title: {
-    fontSize: 16,
-    fontWeight: "bold",
-    marginBottom: 4,
-  },
-  price: {
-    fontSize: 14,
-    color: "#555",
+    rowGap: 5,
   },
 });

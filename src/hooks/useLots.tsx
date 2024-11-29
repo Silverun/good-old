@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { databaseService, Lot } from "../services/database/databaseService";
+import { lotsService, Lot } from "../services/database/lots/lotsService";
 
 export const useLots = (userId?: string) => {
   const [lots, setLots] = useState<Lot[] | null>(null);
@@ -7,7 +7,7 @@ export const useLots = (userId?: string) => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const unsubscribe = databaseService.subscribeToLots(
+    const unsubscribe = lotsService.subscribeToLots(
       (fetchedLots) => {
         setLots(fetchedLots);
         if (loading) {

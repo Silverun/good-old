@@ -1,17 +1,26 @@
-import { IDatabaseService, Lot, LotData } from "./databaseService";
-import firestore from "@react-native-firebase/firestore";
+import { ILotsService, Lot, LotData } from "./lotsService";
+import firestore, {
+  FirebaseFirestoreTypes,
+} from "@react-native-firebase/firestore";
 
 export const FirestoreCollections = {
   users: "users",
   lots: "lots",
 } as const;
 
-export class CloudFirestoreService implements IDatabaseService {
+export interface LotDataFirestore extends LotData {
+  createdAt: FirebaseFirestoreTypes.Timestamp;
+}
+
+export class LotsFirestore implements ILotsService {
   async addNewLot(data: LotData) {
     try {
       const doc = await firestore()
         .collection(FirestoreCollections.lots)
-        .add(data);
+        .add({
+          ...data,
+          createdAt: firestore.FieldValue.serverTimestamp(),
+        });
       console.log("Lot created with id: ", doc.id);
     } catch (error) {
       console.error("Error creating new lot:", error);
@@ -22,7 +31,7 @@ export class CloudFirestoreService implements IDatabaseService {
   async getLots() {
     try {
       const snapshot = await firestore()
-        .collection<LotData>(FirestoreCollections.lots)
+        .collection<LotDataFirestore>(FirestoreCollections.lots)
         .get();
 
       if (snapshot.empty) {
@@ -35,6 +44,7 @@ export class CloudFirestoreService implements IDatabaseService {
         const lot: Lot = {
           id,
           ...lotData,
+          createdAt: lotData.createdAt.toDate().toISOString(),
         };
         return lot;
       });
@@ -48,9 +58,9 @@ export class CloudFirestoreService implements IDatabaseService {
   subscribeToLots(
     onUpdate: (lots: Lot[]) => void,
     onError: (error: Error) => void,
-    userId?: number
+    userId?: string
   ) {
-    const collectionRef = firestore().collection<LotData>(
+    const collectionRef = firestore().collection<LotDataFirestore>(
       FirestoreCollections.lots
     );
 
@@ -63,6 +73,7 @@ export class CloudFirestoreService implements IDatabaseService {
         const lots = snapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
+          createdAt: doc.data().createdAt?.toDate().toISOString(),
         })) as Lot[];
         onUpdate(lots);
       },
@@ -74,3 +85,5 @@ export class CloudFirestoreService implements IDatabaseService {
     return unsubscribe;
   }
 }
+
+export const lotsFirestore = new LotsFirestore();

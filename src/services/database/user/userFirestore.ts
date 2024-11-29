@@ -10,7 +10,7 @@ import {
 import auth from "@react-native-firebase/auth";
 import { USER } from "../../../constants";
 import { ReactNativeFirebase } from "@react-native-firebase/app";
-import { FirestoreCollections } from "../cloudFirestore";
+import { FirestoreCollections } from "../lots/lotsFirestore";
 import { User } from "../../../store/userSlice/userSlice";
 
 export class UserFirestore implements IUserService {

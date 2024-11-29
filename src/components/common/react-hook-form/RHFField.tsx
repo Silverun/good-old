@@ -35,7 +35,7 @@ export const RHFField = <TFieldValues extends FieldValues>({
   error,
 }: RHFFieldProps<TFieldValues>) => {
   const { text, style } = label;
-  const { control, name, rules, render } = controller;
+  const { control, name, rules, render, defaultValue } = controller;
   const {
     style: inputStyle,
     placeholder,
@@ -52,6 +52,8 @@ export const RHFField = <TFieldValues extends FieldValues>({
         control={control}
         name={name}
         rules={rules}
+        defaultValue={defaultValue}
+        // {...controller}
         render={
           render
             ? render

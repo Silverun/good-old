@@ -4,4 +4,10 @@ Add lot screen:
 - ! Check lot adding with ref to userId - string
 - Add async storage service
 - Lots item and list styling
-- ! 4mb per photo, check usage, downscale size when loading into storage
+- Check redundant methods in firebase regarding fetching lots (getLots)
+- Check locales in createdAt time inside LotItem
+- Check locales constant file
+-! AddLotForm - images are uploaded even if form fails
+- Error handling addNewLot
+- RHF cleanup?
+- Empty description fails to submit!

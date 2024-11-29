@@ -9,9 +9,9 @@ import { LOT_CATEGORIES, LotCategory } from "../../../../../../constants";
 import { AddLotImages } from "../../../../../../screens";
 import { useLotImages } from "../../../../../../screens/main/MyLots/AddLot/hooks/useLotImages";
 import {
-  databaseService,
+  lotsService,
   LotData,
-} from "../../../../../../services/database/databaseService";
+} from "../../../../../../services/database/lots/lotsService";
 import { useNavigation } from "@react-navigation/native";
 
 export interface AddLotFormData {
@@ -52,9 +52,12 @@ export const AddLotForm = ({ images }: AddLotFormProps) => {
       imageUrls: imagesUrls,
       userId: user!.userId,
     };
-
-    await databaseService.addNewLot(fullFormData);
-    goBack();
+    try {
+      await lotsService.addNewLot(fullFormData);
+      goBack();
+    } catch (error) {
+      alert(error);
+    }
   };
 
   return (

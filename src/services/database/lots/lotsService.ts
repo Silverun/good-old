@@ -1,13 +1,13 @@
-import { LotCategory } from "../../constants";
-import { CloudFirestoreService } from "./cloudFirestore";
+import { LotCategory } from "../../../constants";
+import { lotsFirestore } from "./lotsFirestore";
 
-export interface IDatabaseService {
+export interface ILotsService {
   addNewLot: (data: LotData) => Promise<void>;
   getLots: (userId?: string) => Promise<Lot[]>;
   subscribeToLots: (
     onUpdate: (lots: Lot[]) => void,
     onError: (error: Error) => void,
-    userId?: number
+    userId?: string
   ) => () => void;
 }
 
@@ -22,20 +22,22 @@ export interface LotData {
 
 export interface Lot extends LotData {
   id: string;
+  createdAt: string;
 }
 
-class DatabaseService {
-  private databaseService: IDatabaseService;
+class LotsService {
+  private lotsService: ILotsService;
 
-  constructor(databaseService: IDatabaseService) {
-    this.databaseService = databaseService;
+  constructor(lotsService: ILotsService) {
+    this.lotsService = lotsService;
   }
 
   async addNewLot(data: LotData) {
-    this.databaseService.addNewLot(data);
+    this.lotsService.addNewLot(data);
   }
+
   async getLots() {
-    return this.databaseService.getLots();
+    return this.lotsService.getLots();
   }
 
   subscribeToLots(
@@ -43,9 +45,8 @@ class DatabaseService {
     onError: (error: Error) => void,
     userId?: string
   ) {
-    return this.databaseService.subscribeToLots(onUpdate, onError, userId);
+    return this.lotsService.subscribeToLots(onUpdate, onError, userId);
   }
 }
 
-const cloudFirestore = new CloudFirestoreService();
-export const databaseService = new DatabaseService(cloudFirestore);
+export const lotsService = new LotsService(lotsFirestore);

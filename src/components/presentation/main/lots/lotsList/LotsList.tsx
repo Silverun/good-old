@@ -11,6 +11,8 @@ interface LotsListProps {
 export const LotsList = ({ userId }: LotsListProps) => {
   const { lots, loading, error } = useLots(userId);
 
+  const itemSeparator = () => <View style={{ height: 15 }} />;
+
   if (loading) {
     return <Loader />;
   }
@@ -31,6 +33,7 @@ export const LotsList = ({ userId }: LotsListProps) => {
     <View style={styles.container}>
       <FlatList
         data={lots}
+        ItemSeparatorComponent={itemSeparator}
         renderItem={({ item }) => <LotItem key={item.id} item={item} />}
       />
     </View>
@@ -41,5 +44,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignSelf: "stretch",
+    padding: 10,
   },
 });
