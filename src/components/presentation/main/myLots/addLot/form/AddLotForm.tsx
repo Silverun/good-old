@@ -105,7 +105,7 @@ export const AddLotForm = ({ images }: AddLotFormProps) => {
           name: "description",
           control,
           rules: {
-            required: false,
+            required: "Description is required",
           },
         }}
         input={{

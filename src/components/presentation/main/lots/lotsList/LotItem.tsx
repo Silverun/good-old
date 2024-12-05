@@ -1,14 +1,15 @@
 import React from "react";
-import { View, Image, StyleSheet } from "react-native";
+import { View, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { Lot } from "../../../../../services/database/lots/lotsService";
 import { TextCustom } from "../../../../common";
 import { LotNoImage } from "./LotNoImage";
 
 interface LotItemProps {
   item: Lot;
+  onItemPress: () => void;
 }
 
-export const LotItem = ({ item }: LotItemProps) => {
+export const LotItem = ({ item, onItemPress }: LotItemProps) => {
   const { title, price, imageUrls, createdAt } = item;
   const firstImageUrl = imageUrls[0] || "";
   const formattedDate = new Intl.DateTimeFormat("en-GB", {
@@ -17,7 +18,7 @@ export const LotItem = ({ item }: LotItemProps) => {
   }).format(new Date(createdAt));
 
   return (
-    <View style={styles.container}>
+    <TouchableOpacity onPress={onItemPress} style={styles.container}>
       {firstImageUrl ? (
         <Image source={{ uri: firstImageUrl }} style={styles.image} />
       ) : (
@@ -32,7 +33,7 @@ export const LotItem = ({ item }: LotItemProps) => {
           {formattedDate}
         </TextCustom>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

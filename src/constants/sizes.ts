@@ -21,9 +21,9 @@ export const FONTS_SIZES = {
 
 export type FontSizes = keyof typeof FONTS_SIZES;
 
-const deviceWidth = Dimensions.get("screen");
-export const deviceWidthRatio = (ratio: number) => deviceWidth.width * ratio;
-export const deviceHeightRatio = (ratio: number) => deviceWidth.height * ratio;
+const deviceScreen = Dimensions.get("screen");
+export const deviceWidthRatio = (ratio: number) => deviceScreen.width * ratio;
+export const deviceHeightRatio = (ratio: number) => deviceScreen.height * ratio;
 
 export const WIDTH = {
   ten: deviceWidthRatio(0.1),
@@ -36,6 +36,7 @@ export const WIDTH = {
   seventy: deviceWidthRatio(0.7),
   eighty: deviceWidthRatio(0.8),
   ninety: deviceWidthRatio(0.9),
+  full: deviceWidthRatio(1),
 } as const;
 
 export const HEIGHT = {
@@ -48,4 +49,5 @@ export const HEIGHT = {
   seventy: deviceHeightRatio(0.7),
   eighty: deviceHeightRatio(0.8),
   ninety: deviceHeightRatio(0.9),
+  full: deviceHeightRatio(1),
 } as const;

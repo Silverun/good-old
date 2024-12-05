@@ -16,7 +16,7 @@ export const TextCustom = ({
   ...props
 }: TextCustomProps) => {
   const { theme } = useThemeCustom();
-  const fontSize = size ? FONTS_SIZES[size] : FONTS_SIZES.p;
+  const fontSize = size ? FONTS_SIZES[size] : FONTS_SIZES.h5;
   const weight = fontWeight ? FONT_FAMILIES[fontWeight] : FONT_FAMILIES.regular;
 
   return (

@@ -1,12 +1,10 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MainRoutes } from "../routes";
 import { LotsScreen, ProfileScreen } from "../../screens";
-import { MainTabsParamList, MainTabsScreenProps } from "./Main.types";
+import { MainTabsParamList } from "./Main.types";
 import { MainTabsScreenOptions } from "./Main.options";
 import MyLotsNavigation from "../myLots/myLots";
-import { useEffect } from "react";
 import { useCurrentPath } from "../../hooks/usePath";
-import { useNavigationContainerRef } from "@react-navigation/native";
 
 const Tabs = createBottomTabNavigator<MainTabsParamList>();
 
