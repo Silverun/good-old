@@ -53,7 +53,6 @@ export const RHFField = <TFieldValues extends FieldValues>({
         name={name}
         rules={rules}
         defaultValue={defaultValue}
-        // {...controller}
         render={
           render
             ? render

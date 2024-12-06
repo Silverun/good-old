@@ -44,4 +44,27 @@ export class FirebaseStorageService implements IStorageService {
 
     return resolvedImages;
   }
+
+  async deleteImages(imageUrls: string[]): Promise<void> {
+    const folderPath = FirebaseStorageBuckets.default.folders.images.lots;
+    const deletePromises = imageUrls.map(async (url) => {
+      try {
+        const decodedUrl = decodeURIComponent(url);
+        const path = folderPath + decodedUrl.split(folderPath)[1].split("?")[0];
+        const reference = storage().ref(path);
+        await reference.delete();
+        console.log(`Image at path ${path} deleted successfully.`);
+      } catch (error) {
+        throw error;
+      }
+    });
+
+    try {
+      await Promise.all(deletePromises);
+      console.log("All images deleted successfully.");
+    } catch (error) {
+      console.error("Error while deleting images from Firebase:", error);
+      throw error;
+    }
+  }
 }

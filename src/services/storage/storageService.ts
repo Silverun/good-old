@@ -2,6 +2,7 @@ import { FirebaseStorageService } from "./firebaseStorage";
 
 export interface IStorageService {
   uploadImages(images: string[], path: string): Promise<string[]>;
+  deleteImages(imageUrls: string[]): Promise<void>;
 }
 
 class StorageService {
@@ -13,6 +14,14 @@ class StorageService {
 
   async uploadImages(images: string[], path: string): Promise<string[]> {
     return this.storageService.uploadImages(images, path);
+  }
+
+  async deleteImages(imageUrls: string[]): Promise<void> {
+    try {
+      this.storageService.deleteImages(imageUrls);
+    } catch (error) {
+      throw error;
+    }
   }
 }
 

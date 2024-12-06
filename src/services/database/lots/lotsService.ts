@@ -1,4 +1,5 @@
 import { LotCategory } from "../../../constants";
+import { storageService } from "../../storage/storageService";
 import { lotsFirestore } from "./lotsFirestore";
 
 export interface ILotsService {
@@ -9,6 +10,7 @@ export interface ILotsService {
     onError: (error: Error) => void,
     userId?: string
   ) => () => void;
+  deleteLot: (lotId: string) => Promise<void>;
 }
 
 export interface LotData {
@@ -46,6 +48,17 @@ class LotsService {
     userId?: string
   ) {
     return this.lotsService.subscribeToLots(onUpdate, onError, userId);
+  }
+
+  async deleteLot(lot: Lot) {
+    try {
+      await this.lotsService.deleteLot(lot.id);
+      if (lot.imageUrls.length > 0) {
+        await storageService.deleteImages(lot.imageUrls);
+      }
+    } catch (error) {
+      throw new Error("There was an error deleting the lot.");
+    }
   }
 }
 

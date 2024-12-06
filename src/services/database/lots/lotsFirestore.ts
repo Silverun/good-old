@@ -1,5 +1,6 @@
 import { ILotsService, Lot, LotData } from "./lotsService";
 import firestore, {
+  collection,
   FirebaseFirestoreTypes,
 } from "@react-native-firebase/firestore";
 
@@ -24,6 +25,19 @@ export class LotsFirestore implements ILotsService {
       console.log("Lot created with id: ", doc.id);
     } catch (error) {
       console.error("Error creating new lot:", error);
+      throw error;
+    }
+  }
+
+  async deleteLot(lotId: string) {
+    try {
+      await firestore()
+        .collection(FirestoreCollections.lots)
+        .doc(lotId)
+        .delete();
+      console.log(`Lot with id ${lotId} deleted successfully.`);
+    } catch (error) {
+      console.error(`Error deleting lot with id ${lotId}:`, error);
       throw error;
     }
   }

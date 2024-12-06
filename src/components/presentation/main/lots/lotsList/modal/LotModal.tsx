@@ -1,7 +1,10 @@
 import React from "react";
 import { View, Modal, Image, ScrollView } from "react-native";
 import { ButtonCustom, TextCustom } from "../../../../../common";
-import { Lot } from "../../../../../../services/database/lots/lotsService";
+import {
+  Lot,
+  lotsService,
+} from "../../../../../../services/database/lots/lotsService";
 import { useAppSelector, useThemeCustom } from "../../../../../../hooks";
 import { createStyle } from "./LotModal.styles";
 import { LotModalImages } from "./LotModalImages";
@@ -22,12 +25,20 @@ export const LotModal = ({
   const styles = createStyle(theme);
   const { user } = useAppSelector((state) => state.user);
 
-  const isOwner = user?.userId === selectedLot.userId;
-
   if (!modalVisible) {
     return null;
   }
 
+  const deleteLotHandler = async () => {
+    try {
+      await lotsService.deleteLot(selectedLot);
+      setModalVisible(false);
+    } catch (error) {
+      alert(error);
+    }
+  };
+
+  const isOwner = user?.userId === selectedLot.userId;
   const formattedDate = new Intl.DateTimeFormat("en-GB", {
     dateStyle: "full",
     timeStyle: "short",
@@ -54,7 +65,10 @@ export const LotModal = ({
             {selectedLot.description || "No description available."}
           </TextCustom>
         </ScrollView>
-        <LotActionButtons isOwner={isOwner} />
+        <LotActionButtons
+          deleteLotHandler={deleteLotHandler}
+          isOwner={isOwner}
+        />
         <ButtonCustom
           title="←"
           style={styles.backButton}

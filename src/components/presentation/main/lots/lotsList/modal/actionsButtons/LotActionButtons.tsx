@@ -4,9 +4,13 @@ import { ButtonCustom } from "../../../../../../common";
 
 interface LotActionButtonsProps {
   isOwner: boolean;
+  deleteLotHandler: () => Promise<void>;
 }
 
-export const LotActionButtons = ({ isOwner }: LotActionButtonsProps) => {
+export const LotActionButtons = ({
+  isOwner,
+  deleteLotHandler,
+}: LotActionButtonsProps) => {
   const actions = (
     <>
       <ButtonCustom title="Buy" onPress={() => console.log("Buy")} />
@@ -15,7 +19,7 @@ export const LotActionButtons = ({ isOwner }: LotActionButtonsProps) => {
 
   const myActions = (
     <>
-      <ButtonCustom title="Delete" onPress={() => console.log("Delete")} />
+      <ButtonCustom title="Delete" onPress={deleteLotHandler} />
     </>
   );
 

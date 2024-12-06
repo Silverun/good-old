@@ -12,6 +12,7 @@ interface LotItemProps {
 export const LotItem = ({ item, onItemPress }: LotItemProps) => {
   const { title, price, imageUrls, createdAt } = item;
   const firstImageUrl = imageUrls[0] || "";
+
   const formattedDate = new Intl.DateTimeFormat("en-GB", {
     dateStyle: "full",
     timeStyle: "short",

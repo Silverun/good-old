@@ -20,6 +20,7 @@ export const styles = StyleSheet.create({
     paddingVertical: 0,
   },
   add_button_text: {
+    paddingBottom: 5,
     fontSize: 30,
   },
 });
