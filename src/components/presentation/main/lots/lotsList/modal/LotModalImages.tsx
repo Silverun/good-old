@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, ScrollView, Image, StyleProp } from "react-native";
+import { ScrollView, Image, StyleProp, View } from "react-native";
 import { LotNoImage } from "../LotNoImage";
 
 interface LotModalImagesProps {
@@ -18,10 +18,15 @@ export const LotModalImages = ({ imageUrls, styles }: LotModalImagesProps) => {
   }
 
   return (
-    <ScrollView horizontal contentContainerStyle={styles.imageScrollContainer}>
-      {imageUrls.map((imageUrl, index) => (
-        <Image key={index} source={{ uri: imageUrl }} style={styles.image} />
-      ))}
-    </ScrollView>
+    <View>
+      <ScrollView
+        horizontal
+        contentContainerStyle={styles.imageScrollContainer}
+      >
+        {imageUrls.map((imageUrl, index) => (
+          <Image key={index} source={{ uri: imageUrl }} style={styles.image} />
+        ))}
+      </ScrollView>
+    </View>
   );
 };

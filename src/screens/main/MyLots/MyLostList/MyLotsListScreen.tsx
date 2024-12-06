@@ -1,11 +1,10 @@
-import { View, Text } from "react-native";
+import { View } from "react-native";
 import { MyLotsScreenProps } from "../../../../navigation/myLots/myLots.types";
 import { MyLotsRoutes } from "../../../../navigation/routes";
 import { styles } from "./MyLotsListScreen.styles";
 import { ButtonCustom } from "../../../../components/common";
 import { useAppSelector } from "../../../../hooks";
 import { LotsList } from "../../../../components/presentation/main/lots/lotsList/LotsList";
-import { useEffect } from "react";
 
 export const MyLotsListScreen = ({ navigation }: MyLotsScreenProps) => {
   const addLotHandler = () => {

@@ -2,9 +2,10 @@ import React from "react";
 import { View, Modal, Image, ScrollView } from "react-native";
 import { ButtonCustom, TextCustom } from "../../../../../common";
 import { Lot } from "../../../../../../services/database/lots/lotsService";
-import { useThemeCustom } from "../../../../../../hooks";
+import { useAppSelector, useThemeCustom } from "../../../../../../hooks";
 import { createStyle } from "./LotModal.styles";
 import { LotModalImages } from "./LotModalImages";
+import { LotActionButtons } from "./actionsButtons/LotActionButtons";
 
 interface LotModalProps {
   modalVisible: boolean;
@@ -19,6 +20,9 @@ export const LotModal = ({
 }: LotModalProps) => {
   const { theme } = useThemeCustom();
   const styles = createStyle(theme);
+  const { user } = useAppSelector((state) => state.user);
+
+  const isOwner = user?.userId === selectedLot.userId;
 
   if (!modalVisible) {
     return null;
@@ -38,24 +42,23 @@ export const LotModal = ({
     >
       <View style={styles.modalContainer}>
         <LotModalImages styles={styles} imageUrls={selectedLot.imageUrls} />
-        <View>
+        <View style={styles.textContainer}>
           <TextCustom fontWeight="bold" size="h3">
             {selectedLot.title}
           </TextCustom>
           <TextCustom size="h4">{selectedLot.price} $</TextCustom>
           <TextCustom size="h5">{formattedDate}</TextCustom>
         </View>
-        <ScrollView>
-          <TextCustom>
+        <ScrollView style={styles.description}>
+          <TextCustom size="h4">
             {selectedLot.description || "No description available."}
           </TextCustom>
         </ScrollView>
-        <View style={styles.buttonsContainer}>
-          <ButtonCustom title="Buy" onPress={() => console.log("Buy")} />
-        </View>
+        <LotActionButtons isOwner={isOwner} />
         <ButtonCustom
-          title="Close"
-          style={styles.closeButton}
+          title="←"
+          style={styles.backButton}
+          textStyle={styles.backButtonText}
           onPress={() => setModalVisible(false)}
         />
       </View>
