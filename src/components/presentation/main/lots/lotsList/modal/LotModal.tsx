@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Modal, Image, ScrollView } from "react-native";
+import { View, Modal, ScrollView } from "react-native";
 import { ButtonCustom, TextCustom } from "../../../../../common";
 import {
   Lot,
@@ -38,6 +38,15 @@ export const LotModal = ({
     }
   };
 
+  const buyLotHandler = async () => {
+    try {
+      await lotsService.buyLot(selectedLot.id);
+      setModalVisible(false);
+    } catch (error) {
+      alert(error);
+    }
+  };
+
   const isOwner = user?.userId === selectedLot.userId;
   const formattedDate = new Intl.DateTimeFormat("en-GB", {
     dateStyle: "full",
@@ -66,6 +75,7 @@ export const LotModal = ({
           </TextCustom>
         </ScrollView>
         <LotActionButtons
+          buyLotHandler={buyLotHandler}
           deleteLotHandler={deleteLotHandler}
           isOwner={isOwner}
         />

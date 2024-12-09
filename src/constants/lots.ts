@@ -6,6 +6,14 @@ export const LOT_CATEGORIES = [
   { id: 5, title: "Electronics" },
 ] as const;
 
+export const LOT_STATUS = {
+  active: "active",
+  sold: "sold",
+  blocked: "blocked",
+} as const;
+
+export type LotStatus = keyof typeof LOT_STATUS;
+
 export const MAX_IMAGES = 5 as const;
 
 export type LotCategory = (typeof LOT_CATEGORIES)[number];

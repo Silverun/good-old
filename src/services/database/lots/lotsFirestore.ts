@@ -1,7 +1,9 @@
+import { LOT_STATUS } from "../../../constants";
 import { ILotsService, Lot, LotData } from "./lotsService";
 import firestore, {
-  collection,
+  FieldValue,
   FirebaseFirestoreTypes,
+  Timestamp,
 } from "@react-native-firebase/firestore";
 
 export const FirestoreCollections = {
@@ -9,20 +11,28 @@ export const FirestoreCollections = {
   lots: "lots",
 } as const;
 
-export interface LotDataFirestore extends LotData {
-  createdAt: FirebaseFirestoreTypes.Timestamp;
+export interface LotDataFirestoreOut extends Omit<Lot, "id" | "createdAt"> {
+  createdAt: Timestamp;
+}
+export interface LotDataFirestoreIn
+  extends Omit<LotDataFirestoreOut, "createdAt"> {
+  createdAt: FieldValue;
 }
 
 export class LotsFirestore implements ILotsService {
+  lotsCollectionRef<
+    T extends FirebaseFirestoreTypes.DocumentData = LotDataFirestoreOut
+  >() {
+    return firestore().collection<T>(FirestoreCollections.lots);
+  }
+
   async addNewLot(data: LotData) {
     try {
-      const doc = await firestore()
-        .collection(FirestoreCollections.lots)
-        .add({
-          ...data,
-          createdAt: firestore.FieldValue.serverTimestamp(),
-        });
-      console.log("Lot created with id: ", doc.id);
+      await this.lotsCollectionRef<LotDataFirestoreIn>().add({
+        ...data,
+        createdAt: firestore.FieldValue.serverTimestamp(),
+        status: LOT_STATUS.active,
+      });
     } catch (error) {
       console.error("Error creating new lot:", error);
       throw error;
@@ -31,10 +41,7 @@ export class LotsFirestore implements ILotsService {
 
   async deleteLot(lotId: string) {
     try {
-      await firestore()
-        .collection(FirestoreCollections.lots)
-        .doc(lotId)
-        .delete();
+      await this.lotsCollectionRef().doc(lotId).delete();
       console.log(`Lot with id ${lotId} deleted successfully.`);
     } catch (error) {
       console.error(`Error deleting lot with id ${lotId}:`, error);
@@ -42,29 +49,14 @@ export class LotsFirestore implements ILotsService {
     }
   }
 
-  async getLots() {
+  async buyLot(lotId: string) {
     try {
-      const snapshot = await firestore()
-        .collection<LotDataFirestore>(FirestoreCollections.lots)
-        .get();
-
-      if (snapshot.empty) {
-        throw new Error("No lots found.");
-      }
-
-      const lots = snapshot.docs.map((doc) => {
-        const lotData = doc.data();
-        const id = doc.id;
-        const lot: Lot = {
-          id,
-          ...lotData,
-          createdAt: lotData.createdAt.toDate().toISOString(),
-        };
-        return lot;
-      });
-      return lots;
+      await this.lotsCollectionRef<LotDataFirestoreIn>()
+        .doc(lotId)
+        .update({ status: LOT_STATUS.sold });
+      console.log(`Lot with id ${lotId} bought successfully.`);
     } catch (error) {
-      console.error("Error while getting lots:", error);
+      console.error(`Error buying lot with id ${lotId}:`, error);
       throw error;
     }
   }
@@ -74,21 +66,16 @@ export class LotsFirestore implements ILotsService {
     onError: (error: Error) => void,
     userId?: string
   ) {
-    const collectionRef = firestore().collection<LotDataFirestore>(
-      FirestoreCollections.lots
-    );
-
-    const query = userId
-      ? collectionRef.where("userId", "==", userId)
-      : collectionRef;
+    const ref = this.lotsCollectionRef();
+    const query = userId ? ref.where("userId", "==", userId) : ref;
 
     const unsubscribe = query.onSnapshot(
       (snapshot) => {
-        const lots = snapshot.docs.map((doc) => ({
+        const lots: Lot[] = snapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
           createdAt: doc.data().createdAt?.toDate().toISOString(),
-        })) as Lot[];
+        }));
         onUpdate(lots);
       },
       (error) => {

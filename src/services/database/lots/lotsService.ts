@@ -1,16 +1,16 @@
-import { LotCategory } from "../../../constants";
+import { LotCategory, LotStatus } from "../../../constants";
 import { storageService } from "../../storage/storageService";
 import { lotsFirestore } from "./lotsFirestore";
 
 export interface ILotsService {
   addNewLot: (data: LotData) => Promise<void>;
-  getLots: (userId?: string) => Promise<Lot[]>;
   subscribeToLots: (
     onUpdate: (lots: Lot[]) => void,
     onError: (error: Error) => void,
     userId?: string
   ) => () => void;
   deleteLot: (lotId: string) => Promise<void>;
+  buyLot: (lotId: string) => Promise<void>;
 }
 
 export interface LotData {
@@ -25,6 +25,7 @@ export interface LotData {
 export interface Lot extends LotData {
   id: string;
   createdAt: string;
+  status: LotStatus;
 }
 
 class LotsService {
@@ -35,11 +36,19 @@ class LotsService {
   }
 
   async addNewLot(data: LotData) {
-    this.lotsService.addNewLot(data);
+    try {
+      this.lotsService.addNewLot(data);
+    } catch (error) {
+      throw new Error("There was an error adding the lot.");
+    }
   }
 
-  async getLots() {
-    return this.lotsService.getLots();
+  async buyLot(lotId: string) {
+    try {
+      this.lotsService.buyLot(lotId);
+    } catch (error) {
+      throw new Error("There was an error buying the lot.");
+    }
   }
 
   subscribeToLots(

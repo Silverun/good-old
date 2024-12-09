@@ -5,15 +5,17 @@ import { ButtonCustom } from "../../../../../../common";
 interface LotActionButtonsProps {
   isOwner: boolean;
   deleteLotHandler: () => Promise<void>;
+  buyLotHandler: () => Promise<void>;
 }
 
 export const LotActionButtons = ({
   isOwner,
   deleteLotHandler,
+  buyLotHandler,
 }: LotActionButtonsProps) => {
   const actions = (
     <>
-      <ButtonCustom title="Buy" onPress={() => console.log("Buy")} />
+      <ButtonCustom title="Buy" onPress={buyLotHandler} />
     </>
   );
 

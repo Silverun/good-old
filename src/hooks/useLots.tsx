@@ -9,8 +9,8 @@ export const useLots = (userId?: string) => {
   useEffect(() => {
     const unsubscribe = lotsService.subscribeToLots(
       (fetchedLots) => {
-        const allLotsHaveCreatedAt = fetchedLots.every(
-          (lot) => lot.createdAt !== undefined
+        const allLotsHaveCreatedAt = fetchedLots.every((lot) =>
+          Boolean(lot.createdAt)
         );
 
         if (allLotsHaveCreatedAt) {
