@@ -5,13 +5,15 @@ import { Loader, TextCustom } from "../../../../common";
 import { LotItem } from "./LotItem";
 import { Lot } from "../../../../../services/database/lots/lotsService";
 import { LotModal } from "./modal/LotModal";
+import { LotStatus } from "../../../../../constants";
 
 interface LotsListProps {
   userId?: string;
+  status?: LotStatus;
 }
 
-export const LotsList = ({ userId }: LotsListProps) => {
-  const { lots, loading, error } = useLots(userId);
+export const LotsList = ({ userId, status }: LotsListProps) => {
+  const { lots, loading, error } = useLots(userId, status);
   const [selectedLot, setSelectedLot] = useState<Lot | null>(null);
   const [modalVisible, setModalVisible] = useState(false);
 

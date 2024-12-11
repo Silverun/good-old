@@ -12,6 +12,7 @@ export type Theme = {
   placeholderTextColor: string;
   loader: string;
   profileImagePlaceholder: string;
+  tabBarBadge: string;
 };
 
 const PALLETTE = {
@@ -53,6 +54,7 @@ const light: Theme = {
   placeholderTextColor: PALLETTE.silver,
   loader: PALLETTE.moss_green,
   profileImagePlaceholder: PALLETTE.gray,
+  tabBarBadge: PALLETTE.red,
 };
 
 const dark: Theme = {

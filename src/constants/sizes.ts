@@ -16,6 +16,7 @@ export const FONTS_SIZES = {
   h4: 16,
   h5: 14,
   h6: 12,
+  h7: 10,
   title_small: 20,
 } as const;
 

@@ -3,6 +3,8 @@ import { View, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { Lot } from "../../../../../services/database/lots/lotsService";
 import { TextCustom } from "../../../../common";
 import { LotNoImage } from "./LotNoImage";
+import { MaterialIcons } from "@expo/vector-icons";
+import { THEMES } from "../../../../../constants";
 
 interface LotItemProps {
   item: Lot;
@@ -10,7 +12,7 @@ interface LotItemProps {
 }
 
 export const LotItem = ({ item, onItemPress }: LotItemProps) => {
-  const { title, price, imageUrls, createdAt } = item;
+  const { title, price, imageUrls, createdAt, status } = item;
   const firstImageUrl = imageUrls[0] || "";
 
   const formattedDate = new Intl.DateTimeFormat("en-GB", {
@@ -24,6 +26,14 @@ export const LotItem = ({ item, onItemPress }: LotItemProps) => {
         <Image source={{ uri: firstImageUrl }} style={styles.image} />
       ) : (
         <LotNoImage />
+      )}
+      {status === "sold" && (
+        <MaterialIcons
+          style={styles.soldIcon}
+          name="check-circle"
+          size={32}
+          color={THEMES.light.buttonBackground}
+        />
       )}
       <View style={styles.textContainer}>
         <TextCustom fontWeight="bold" size="h3">
@@ -53,5 +63,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     rowGap: 5,
+  },
+  soldIcon: {
+    position: "absolute",
+    top: 10,
+    right: 10,
   },
 });

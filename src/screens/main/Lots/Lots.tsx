@@ -4,7 +4,7 @@ import { LotsList } from "../../../components/presentation/main/lots/lotsList/Lo
 const LotsScreen = () => {
   return (
     <View style={styles.container}>
-      <LotsList />
+      <LotsList status="active" />
     </View>
   );
 };

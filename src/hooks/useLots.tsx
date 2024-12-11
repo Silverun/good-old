@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { lotsService, Lot } from "../services/database/lots/lotsService";
+import { LotStatus } from "../constants";
 
-export const useLots = (userId?: string) => {
+export const useLots = (userId?: string, status?: LotStatus) => {
   const [lots, setLots] = useState<Lot[] | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -14,7 +15,9 @@ export const useLots = (userId?: string) => {
         );
 
         if (allLotsHaveCreatedAt) {
-          setLots(fetchedLots);
+          status
+            ? setLots(fetchedLots.filter((lot) => lot.status === status))
+            : setLots(fetchedLots);
           setLoading(false);
         } else {
           setLoading(true);
