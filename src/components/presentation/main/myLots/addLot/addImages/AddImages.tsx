@@ -6,6 +6,8 @@ import {
   Image,
   ScrollView,
   Modal,
+  Alert,
+  Linking,
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { useThemeCustom } from "../../../../../../hooks";
@@ -54,16 +56,29 @@ export const AddImages = ({ images, setImages }: AddImagesProps) => {
   const pickFromCamera = async () => {
     closeModal();
     if (selectedIndex === null) return;
+    try {
+      let result = await ImagePicker.launchCameraAsync({
+        allowsEditing: true,
+        quality: 1,
+      });
 
-    let result = await ImagePicker.launchCameraAsync({
-      allowsEditing: true,
-      quality: 1,
-    });
-
-    if (!result.canceled && result.assets) {
-      const newImages = [...images];
-      newImages[selectedIndex] = result.assets[0].uri;
-      setImages(newImages);
+      if (!result.canceled && result.assets) {
+        const newImages = [...images];
+        newImages[selectedIndex] = result.assets[0].uri;
+        setImages(newImages);
+      }
+    } catch (error) {
+      Alert.alert(
+        "Permissions Denied",
+        "Please grant camera and gallery permissions",
+        [
+          {
+            text: "Cancel",
+            style: "cancel",
+          },
+          { text: "OK", onPress: () => Linking.openSettings() },
+        ]
+      );
     }
   };
 

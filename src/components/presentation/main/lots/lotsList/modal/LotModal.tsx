@@ -9,6 +9,7 @@ import { useAppSelector, useThemeCustom } from "../../../../../../hooks";
 import { createStyle } from "./LotModal.styles";
 import { LotModalImages } from "./LotModalImages";
 import { LotActionButtons } from "./actionsButtons/LotActionButtons";
+import { useToast } from "../../../../../../hooks/useToast";
 
 interface LotModalProps {
   modalVisible: boolean;
@@ -24,6 +25,7 @@ export const LotModal = ({
   const { theme } = useThemeCustom();
   const styles = createStyle(theme);
   const { user } = useAppSelector((state) => state.user);
+  const { showToast } = useToast();
 
   if (!modalVisible) {
     return null;
@@ -32,18 +34,20 @@ export const LotModal = ({
   const deleteLotHandler = async () => {
     try {
       await lotsService.deleteLot(selectedLot);
+      showToast("Lot deleted successfully");
       setModalVisible(false);
     } catch (error) {
-      alert(error);
+      error instanceof Error && showToast(error.message, "error");
     }
   };
 
   const buyLotHandler = async () => {
     try {
       await lotsService.buyLot(selectedLot.id);
+      showToast("Lot bought successfully");
       setModalVisible(false);
     } catch (error) {
-      alert(error);
+      error instanceof Error && showToast(error.message, "error");
     }
   };
 

@@ -14,3 +14,4 @@ Add lot screen:
 - ! Optimization on component, callback, handlers etc
 - ! Keyboard avoiding view for add lot
 - Clicking back on image camera select triggers unhandled error (permission handling)
+- Add toast to all actions

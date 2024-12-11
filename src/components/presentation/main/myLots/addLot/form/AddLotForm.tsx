@@ -13,6 +13,7 @@ import {
   LotData,
 } from "../../../../../../services/database/lots/lotsService";
 import { useNavigation } from "@react-navigation/native";
+import { useToast } from "../../../../../../hooks/useToast";
 
 export interface AddLotFormData {
   title: string;
@@ -37,6 +38,7 @@ export const AddLotForm = ({ images }: AddLotFormProps) => {
   const { uploadLotImages } = useLotImages();
   const { user } = useAppSelector((state) => state.user);
   const { goBack } = useNavigation();
+  const { showToast } = useToast();
 
   const {
     handleSubmit,
@@ -54,9 +56,10 @@ export const AddLotForm = ({ images }: AddLotFormProps) => {
     };
     try {
       await lotsService.addNewLot(fullFormData);
+      showToast("Lot added successfully");
       goBack();
     } catch (error) {
-      alert(error);
+      error instanceof Error && showToast(error.message, "error");
     }
   };
 

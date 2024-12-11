@@ -4,6 +4,7 @@ export const LOT_CATEGORIES = [
   { id: 3, title: "Footwear" },
   { id: 4, title: "Sports" },
   { id: 5, title: "Electronics" },
+  { id: 6, title: "Other" },
 ] as const;
 
 export const LOT_STATUS = {

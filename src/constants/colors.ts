@@ -13,6 +13,7 @@ export type Theme = {
   loader: string;
   profileImagePlaceholder: string;
   tabBarBadge: string;
+  errorBackground: string;
 };
 
 const PALLETTE = {
@@ -29,6 +30,7 @@ const PALLETTE = {
   silver: "#C4C7C8",
   battleship_gray: "#888B82",
   red: "#FF0000",
+  dark_red: "#CC0000",
   gray: "#ddd",
   gray_2: "#888",
 } as const;
@@ -55,6 +57,7 @@ const light: Theme = {
   loader: PALLETTE.moss_green,
   profileImagePlaceholder: PALLETTE.gray,
   tabBarBadge: PALLETTE.red,
+  errorBackground: PALLETTE.dark_red,
 };
 
 const dark: Theme = {
