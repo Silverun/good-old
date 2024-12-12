@@ -13,3 +13,8 @@ Add lot screen:
 - Empty description fails to submit!
 - ! Optimization on component, callback, handlers etc
 - ! Keyboard avoiding view for add lot
+- Check theme on load applied correctly
+- Scrollview add into add new lot! close on tap anywhere, button add lot visible, close keyboard on categories open
+- Pagination 
+- add trunk ... item in list - full in modal
+- RHK to another solution

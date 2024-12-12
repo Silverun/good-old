@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import * as NavigationBar from "expo-navigation-bar";
 import { View, StyleSheet, ViewProps } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { DarkModeSwitch } from "../settings/DarkModeSwitch";
 import { useThemeCustom } from "../../../hooks";
 import { Theme } from "../../../constants";
 import { StatusBar } from "expo-status-bar";
@@ -35,7 +34,6 @@ export const RootLayout = ({ children }: RootLayoutProps) => {
         style={isDarkTheme ? "light" : "dark"}
       />
       {children}
-      <DarkModeSwitch />
     </View>
   );
 };
@@ -44,9 +42,6 @@ const styles = (theme: Theme) =>
   StyleSheet.create({
     container: {
       flex: 1,
-      // justifyContent: "center",
-      // alignItems: "center",
-      position: "relative", // DELETE AFTER
       backgroundColor: theme.background,
     },
   });

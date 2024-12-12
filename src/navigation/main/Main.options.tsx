@@ -5,6 +5,7 @@ import { MainTabsParamList } from "./Main.types";
 import { StyleSheet } from "react-native";
 import { MainRoutes } from "../routes";
 import { FONT_FAMILIES, FONTS_SIZES } from "../../constants";
+import { TFunction } from "i18next";
 
 type MainTabsScreenOptions = (props: {
   route: RouteProp<MainTabsParamList, keyof MainTabsParamList>;
@@ -14,7 +15,8 @@ type MainTabsScreenOptions = (props: {
 export const MainTabsScreenOptions =
   (
     currentScreen: string,
-    soldItemsCount: number | undefined
+    soldItemsCount: number | undefined,
+    t: TFunction<"tabLabels", undefined>
   ): MainTabsScreenOptions =>
   ({ route }) => {
     let iconName: keyof typeof MaterialIcons.glyphMap;
@@ -39,6 +41,7 @@ export const MainTabsScreenOptions =
       tabBarStyle: {
         display: currentScreen === "Add new lot" ? "none" : "flex",
       },
+      tabBarLabel: t(route.name),
       tabBarIcon: ({ color, size }) => (
         <MaterialIcons name={iconName} color={color} size={size} />
       ),

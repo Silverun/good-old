@@ -36,7 +36,7 @@ export const LotItem = ({ item, onItemPress }: LotItemProps) => {
         />
       )}
       <View style={styles.textContainer}>
-        <TextCustom fontWeight="bold" size="h3">
+        <TextCustom numberOfLines={2} fontWeight="bold" size="h3">
           {title}
         </TextCustom>
         <TextCustom size="h4">{price} $</TextCustom>

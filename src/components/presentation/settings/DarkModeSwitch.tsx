@@ -28,13 +28,9 @@ export const DarkModeSwitch = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    ///DELETE AFTER
-    position: "absolute", // Absolute positioning
-    top: 60, // Distance from the top
-    right: 10, // Distance from the right
-    zIndex: 9999, // Ensure it stays on top of other components
+    borderWidth: 1,
+    // flex: 1,
+    // justifyContent: "center",
+    // alignItems: "center",
   },
 });

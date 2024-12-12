@@ -31,4 +31,14 @@ export const styles = StyleSheet.create({
     color: THEMES.light.textColorSecondary,
     marginBottom: 8,
   },
+  actionsContainer: {
+    flex: 1,
+    gap: 10,
+  },
+  darkMode: {
+    borderWidth: 1,
+    justifyContent: "space-between",
+    alignItems: "center",
+    flexDirection: "row",
+  },
 });

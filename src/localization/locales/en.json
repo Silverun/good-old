@@ -1,0 +1,10 @@
+{
+  "translation": {
+    "Welcome to React": "Welcome to React and react-i18next"
+  },
+  "tabLabels": {
+    "Lots": "Lots",
+    "Profile": "Profile",
+    "My Lots": "My Lots"
+  }
+}

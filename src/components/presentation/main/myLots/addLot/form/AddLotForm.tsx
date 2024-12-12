@@ -43,10 +43,14 @@ export const AddLotForm = ({ images }: AddLotFormProps) => {
   const {
     handleSubmit,
     control,
+    watch,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm<AddLotFormData>();
 
   const onLotSubmit = async (data: AddLotFormData) => {
+    watch("title");
+    setValue("title", "data");
     const imagesUrls = await uploadLotImages(images);
     const fullFormData: LotData = {
       ...data,
