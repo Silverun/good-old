@@ -16,7 +16,7 @@ export const MainTabsScreenOptions =
   (
     currentScreen: string,
     soldItemsCount: number | undefined,
-    t: TFunction<"tabLabels", undefined>
+    t: TFunction<"navigation", "tabBarLabels">
   ): MainTabsScreenOptions =>
   ({ route }) => {
     let iconName: keyof typeof MaterialIcons.glyphMap;

@@ -1,11 +1,10 @@
 import React from "react";
-import { View, Text, Image } from "react-native";
+import { View, Image } from "react-native";
 import { User } from "../../../../store/userSlice/userSlice";
 import { styles } from "./UserProfileInfo.styles";
 import { TextCustom } from "../../../common";
 import { DarkModeSwitch } from "../../settings/DarkModeSwitch";
 import { LangPicker } from "../../settings/LangSwitch";
-import i18n from "../../../../localization/i18n";
 import { useTranslation } from "react-i18next";
 
 interface UserProfileInfoProps {
@@ -13,8 +12,7 @@ interface UserProfileInfoProps {
 }
 
 export const UserProfileInfo = ({ user }: UserProfileInfoProps) => {
-  const { t } = useTranslation("translation");
-
+  const { t } = useTranslation();
   return (
     <>
       <View style={styles.userInfoContainer}>
@@ -36,9 +34,6 @@ export const UserProfileInfo = ({ user }: UserProfileInfoProps) => {
         <TextCustom style={styles.createdAt}>
           Member since: {new Date(user.createdAt).toLocaleDateString()}
         </TextCustom>
-        {/* <TextCustom size="h3" fontWeight="regular">
-        Current balance: {user.credits}
-      </TextCustom> */}
       </View>
       <View style={styles.actionsContainer}>
         <View style={styles.darkMode}>
@@ -48,9 +43,6 @@ export const UserProfileInfo = ({ user }: UserProfileInfoProps) => {
         <View style={styles.darkMode}>
           <TextCustom>Selected language</TextCustom>
           <LangPicker />
-        </View>
-        <View style={styles.darkMode}>
-          <TextCustom>{t("Welcome to React")}</TextCustom>
         </View>
       </View>
     </>

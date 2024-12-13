@@ -8,6 +8,8 @@ export const styles = StyleSheet.create({
     marginBottom: 10,
   },
   error: {
+    alignSelf: "center",
+    flexWrap: "wrap",
     color: "red",
     marginBottom: 10,
   },

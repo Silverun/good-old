@@ -1,0 +1,25 @@
+{
+  "modal": {
+    "delete": "Удалить",
+    "buy": "Купить"
+  },
+  "addLot": {
+    "heading": "Добавить лот",
+    "lotTitle": "Название лота",
+    "lotTitlePlaceholder": "Добавьте описательное название лота",
+    "lotTitleRequired": "Название обязательно",
+    "lotCategory": "Выберите категорию лота",
+    "lotDescription": "Описание лота",
+    "lotDescriptionRequired": "Описание обязательно",
+    "lotDescriptionPlaceholder": "Добавьте детальное описание лота",
+    "price": "Цена",
+    "priceRequired": "Цена обязательна",
+    "pricePlaceholder": "Укажите цену лота",
+    "addLot": "Добавить лот"
+  },
+  "addImages": {
+    "lotImages": "Фото лота",
+    "camera": "Камера",
+    "gallery": "Галерея"
+  }
+}

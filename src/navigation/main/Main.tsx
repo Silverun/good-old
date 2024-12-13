@@ -13,7 +13,7 @@ const Tabs = createBottomTabNavigator<MainTabsParamList>();
 const MainNavigation = () => {
   const { currentScreen } = useCurrentPath();
   const { soldLotsCount } = useMainNavigation();
-  const { t } = useTranslation("tabLabels");
+  const { t } = useTranslation("navigation", { keyPrefix: "tabBarLabels" });
 
   return (
     <Tabs.Navigator

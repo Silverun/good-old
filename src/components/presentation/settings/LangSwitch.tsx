@@ -1,13 +1,14 @@
 import { StyleSheet, View } from "react-native";
 import { Picker } from "@react-native-picker/picker";
-import i18n from "../../../localization/i18n";
 import { useEffect, useState } from "react";
 import { useThemeCustom } from "../../../hooks";
-import { FONT_FAMILIES, Theme } from "../../../constants";
+import { FONT_FAMILIES, LOCALES, Theme } from "../../../constants";
+import { useTranslation } from "react-i18next";
 
 export const LangPicker = () => {
   const { theme } = useThemeCustom();
-  const [selectedLang, setSelectedLang] = useState<string>();
+  const { i18n } = useTranslation();
+  const [selectedLang, setSelectedLang] = useState<string>(i18n.language);
 
   const styles = createStyles(theme);
 
@@ -26,8 +27,14 @@ export const LangPicker = () => {
           setSelectedLang(itemValue);
         }}
       >
-        <Picker.Item label="English" value="en" />
-        <Picker.Item label="Russian" value="ru" />
+        <Picker.Item
+          label={LOCALES.english.label}
+          value={LOCALES.english.value}
+        />
+        <Picker.Item
+          label={LOCALES.russian.label}
+          value={LOCALES.russian.value}
+        />
       </Picker>
     </View>
   );

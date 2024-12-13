@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { styles } from "./LoginForm.styles";
 import { ButtonCustom, RHFField } from "../../../common";
 import { userService } from "../../../../services/database/user/userService";
+import { useTranslation } from "react-i18next";
 
 interface LoginFormData {
   email: string;
@@ -11,6 +12,7 @@ interface LoginFormData {
 }
 
 export const LoginForm = () => {
+  const { t } = useTranslation("auth", { keyPrefix: "login" });
   const {
     control,
     handleSubmit,
@@ -25,26 +27,19 @@ export const LoginForm = () => {
         alert(error.message);
       }
     }
-    // const { email, password } = data;
-    // try {
-    //   await auth().signInWithEmailAndPassword(email, password);
-    // } catch (e: unknown) {
-    //   const err = e as ReactNativeFirebase.NativeFirebaseError;
-    //   alert("Login failed: " + err.message);
-    // }
   };
 
   return (
     <View style={styles.container}>
       <RHFField
-        label={{ text: "Email", style: styles.label }}
+        label={{ text: t("email"), style: styles.label }}
         controller={{
           name: "email",
           control,
-          rules: { required: "Email is required" },
+          rules: { required: t("emailRequired") },
         }}
         input={{
-          placeholder: "Enter your email",
+          placeholder: t("emailPlaceholder"),
           keyboardType: "email-address",
           autoCapitalize: "none",
           style: styles.input,
@@ -52,14 +47,14 @@ export const LoginForm = () => {
         error={{ errors }}
       />
       <RHFField
-        label={{ text: "Password", style: styles.label }}
+        label={{ text: t("password"), style: styles.label }}
         controller={{
           name: "password",
           control,
-          rules: { required: "Password is required" },
+          rules: { required: t("passwordRequired") },
         }}
         input={{
-          placeholder: "Enter your password",
+          placeholder: t("passwordPlaceholder"),
           secureTextEntry: true,
           style: styles.input,
         }}
@@ -69,7 +64,7 @@ export const LoginForm = () => {
         style={styles.loginButton}
         loading={isSubmitting}
         disabled={isSubmitting}
-        title="Login"
+        title={t("login")}
         onPress={handleSubmit(login)}
       />
     </View>

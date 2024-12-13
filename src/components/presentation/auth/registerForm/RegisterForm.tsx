@@ -2,13 +2,10 @@ import React from "react";
 import { View } from "react-native";
 import { useForm } from "react-hook-form";
 import { styles } from "./RegisterForm.styles";
-import auth from "@react-native-firebase/auth";
-import firestore from "@react-native-firebase/firestore";
-import { USER } from "../../../../constants";
-import { ReactNativeFirebase } from "@react-native-firebase/app";
 import { ButtonCustom, RHFField } from "../../../common";
 import { VALID_NAME } from "../../../../constants/locales";
 import { userService } from "../../../../services/database/user/userService";
+import { useTranslation } from "react-i18next";
 
 export interface RegisterFormData {
   firstName: string;
@@ -18,6 +15,8 @@ export interface RegisterFormData {
 }
 
 export const RegisterForm = () => {
+  const { t } = useTranslation("auth", { keyPrefix: "register" });
+
   const {
     control,
     handleSubmit,
@@ -37,74 +36,74 @@ export const RegisterForm = () => {
   return (
     <View style={styles.container}>
       <RHFField
-        label={{ text: "First Name", style: styles.label }}
+        label={{ text: t("firstName"), style: styles.label }}
         controller={{
           name: "firstName",
           control,
           rules: {
-            required: "First name is required",
+            required: t("firstNameRequired"),
             minLength: {
               value: 2,
-              message: "Name should be at least 2 characters",
+              message: t("minLengthFirstName"),
             },
-            pattern: { value: VALID_NAME, message: "Invalid first name" },
+            pattern: { value: VALID_NAME, message: t("invalidFirstName") },
           },
         }}
-        input={{ placeholder: "Enter your first name" }}
+        input={{ placeholder: t("firstNamePlaceholder") }}
         error={{ errors }}
       />
       <RHFField
-        label={{ text: "Last Name", style: styles.label }}
+        label={{ text: t("lastName"), style: styles.label }}
         controller={{
           name: "lastName",
           control,
           rules: {
-            required: "Last name is required",
-            pattern: { value: VALID_NAME, message: "Invalid last name" },
+            required: t("lastNameRequired"),
+            pattern: { value: VALID_NAME, message: t("invalidLastName") },
             minLength: {
               value: 2,
-              message: "Last name should be at least 2 characters",
+              message: t("minLengthLastName"),
             },
           },
         }}
-        input={{ placeholder: "Enter your last name" }}
+        input={{ placeholder: t("lastNamePlaceholder") }}
         error={{ errors }}
       />
       <RHFField
-        label={{ text: "Email", style: styles.label }}
+        label={{ text: t("email"), style: styles.label }}
         controller={{
           name: "email",
           control,
           rules: {
-            required: "Email is required",
+            required: t("emailRequired"),
             pattern: {
               value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
-              message: "Invalid email address",
+              message: t("invalidEmail"),
             },
           },
         }}
         input={{
-          placeholder: "Enter your email",
+          placeholder: t("emailPlaceholder"),
           keyboardType: "email-address",
           autoCapitalize: "none",
         }}
         error={{ errors }}
       />
       <RHFField
-        label={{ text: "Password", style: styles.label }}
+        label={{ text: t("password"), style: styles.label }}
         controller={{
           name: "password",
           control,
           rules: {
-            required: "Password is required",
+            required: t("passwordRequired"),
             minLength: {
               value: 6,
-              message: "Password must be at least 6 characters",
+              message: t("passwordMinLength"),
             },
           },
         }}
         input={{
-          placeholder: "Enter your password",
+          placeholder: t("passwordPlaceholder"),
           secureTextEntry: true,
         }}
         error={{ errors }}
@@ -112,7 +111,7 @@ export const RegisterForm = () => {
       <ButtonCustom
         style={styles.button}
         loading={isSubmitting}
-        title="Register"
+        title={t("register")}
         onPress={handleSubmit(signUp)}
       />
     </View>

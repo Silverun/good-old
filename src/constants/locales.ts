@@ -10,15 +10,19 @@ export const LOCALE_CHARS = {
 };
 
 export const LOCALES = {
-  English: {
-    value: "en-GB",
+  english: {
+    value: "en",
+    date: "en-GB",
     label: "English",
   },
-  Russian: {
-    value: "ru-RU",
+  russian: {
+    value: "ru",
+    date: "ru-RU",
     label: "Русский",
   },
 } as const;
+
+export type Locales = (typeof LOCALES)[keyof typeof LOCALES];
 
 export type Locale = keyof typeof LOCALE_CHARS;
 type Casing = keyof (typeof LOCALE_CHARS)[Locale];

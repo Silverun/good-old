@@ -15,6 +15,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { stylesThemed } from "./AddImages.styles";
 import { TextCustom } from "../../../../../common";
 import { AddLotImages } from "../../../../../../screens";
+import { useTranslation } from "react-i18next";
 
 interface AddImagesProps {
   images: AddLotImages;
@@ -26,6 +27,7 @@ export const AddImages = ({ images, setImages }: AddImagesProps) => {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const { theme } = useThemeCustom();
   const styles = stylesThemed(theme);
+  const { t } = useTranslation(["lots", "permissions"]);
 
   const openModal = (index: number) => {
     setSelectedIndex(index);
@@ -68,23 +70,19 @@ export const AddImages = ({ images, setImages }: AddImagesProps) => {
         setImages(newImages);
       }
     } catch (error) {
-      Alert.alert(
-        "Permissions Denied",
-        "Please grant camera and gallery permissions",
-        [
-          {
-            text: "Cancel",
-            style: "cancel",
-          },
-          { text: "OK", onPress: () => Linking.openSettings() },
-        ]
-      );
+      Alert.alert(t("permissions:heading"), t("permissions:messageCamera"), [
+        {
+          text: t("permissions:cancel"),
+          style: "cancel",
+        },
+        { text: "OK", onPress: () => Linking.openSettings() },
+      ]);
     }
   };
 
   return (
     <View>
-      <TextCustom>Lot images</TextCustom>
+      <TextCustom>{t("addImages.lotImages")}</TextCustom>
       <ScrollView contentContainerStyle={styles.carouselContainer} horizontal>
         {images.map((item, index) => (
           <TouchableOpacity
@@ -110,7 +108,7 @@ export const AddImages = ({ images, setImages }: AddImagesProps) => {
               color={theme.buttonTextColor}
               backgroundColor={theme.buttonBackground}
             >
-              Camera
+              {t("addImages.camera")}
             </Ionicons.Button>
             <Ionicons.Button
               name="image-outline"
@@ -119,7 +117,7 @@ export const AddImages = ({ images, setImages }: AddImagesProps) => {
               color={theme.buttonTextColor}
               backgroundColor={theme.buttonBackground}
             >
-              Gallery
+              {t("addImages.gallery")}
             </Ionicons.Button>
           </View>
         </TouchableOpacity>

@@ -1,0 +1,25 @@
+{
+  "modal": {
+    "delete": "Delete",
+    "buy": "Buy"
+  },
+  "addLot": {
+    "heading": "Add lot",
+    "lotTitle": "Lot title",
+    "lotTitlePlaceholder": "Add descriptive lot title",
+    "lotTitleRequired": "Title is required",
+    "lotCategory": "Choose lot category",
+    "lotDescription": "Lot description",
+    "lotDescriptionRequired": "Description is required",
+    "lotDescriptionPlaceholder": "Add detailed lot description",
+    "price": "Price",
+    "priceRequired": "Price is required",
+    "pricePlaceholder": "Specify lot price",
+    "addLot": "Add lot"
+  },
+  "addImages": {
+    "lotImages": "Lot images",
+    "camera": "Camera",
+    "gallery": "Gallery"
+  }
+}

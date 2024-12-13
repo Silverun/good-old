@@ -29,15 +29,9 @@ export const themeSlice = createSlice({
       state.isDarkTheme = false;
       AsyncStorage.setItem("theme", "light");
     },
-    loadSavedTheme: (state, action: PayloadAction<"light" | "dark">) => {
-      const savedTheme = action.payload;
-      state.theme = savedTheme === "dark" ? THEMES.dark : THEMES.light;
-      state.isDarkTheme = savedTheme === "dark";
-    },
   },
 });
 
-export const { setDarkTheme, setLightTheme, loadSavedTheme } =
-  themeSlice.actions;
+export const { setDarkTheme, setLightTheme } = themeSlice.actions;
 
 export const themeReducer = themeSlice.reducer;

@@ -18,3 +18,4 @@ Add lot screen:
 - Pagination 
 - add trunk ... item in list - full in modal
 - RHK to another solution
+- ! Theme save and lang MMKV 2.12.2 and load

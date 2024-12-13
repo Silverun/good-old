@@ -5,6 +5,8 @@ import { TextCustom } from "../../../../common";
 import { LotNoImage } from "./LotNoImage";
 import { MaterialIcons } from "@expo/vector-icons";
 import { THEMES } from "../../../../../constants";
+import { dateFormatter } from "../../../../../utils/dateFormatter";
+import { useTranslation } from "react-i18next";
 
 interface LotItemProps {
   item: Lot;
@@ -14,11 +16,9 @@ interface LotItemProps {
 export const LotItem = ({ item, onItemPress }: LotItemProps) => {
   const { title, price, imageUrls, createdAt, status } = item;
   const firstImageUrl = imageUrls[0] || "";
+  const { i18n } = useTranslation();
 
-  const formattedDate = new Intl.DateTimeFormat("en-GB", {
-    dateStyle: "full",
-    timeStyle: "short",
-  }).format(new Date(createdAt));
+  const formattedDate = dateFormatter(createdAt, i18n.language);
 
   return (
     <TouchableOpacity onPress={onItemPress} style={styles.container}>

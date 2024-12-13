@@ -10,6 +10,8 @@ import { createStyle } from "./LotModal.styles";
 import { LotModalImages } from "./LotModalImages";
 import { LotActionButtons } from "./actionsButtons/LotActionButtons";
 import { useToast } from "../../../../../../hooks/useToast";
+import { dateFormatter } from "../../../../../../utils/dateFormatter";
+import { useTranslation } from "react-i18next";
 
 interface LotModalProps {
   modalVisible: boolean;
@@ -26,6 +28,7 @@ export const LotModal = ({
   const styles = createStyle(theme);
   const { user } = useAppSelector((state) => state.user);
   const { showToast } = useToast();
+  const { i18n } = useTranslation();
 
   if (!modalVisible) {
     return null;
@@ -52,10 +55,7 @@ export const LotModal = ({
   };
 
   const isOwner = user?.userId === selectedLot.userId;
-  const formattedDate = new Intl.DateTimeFormat("en-GB", {
-    dateStyle: "full",
-    timeStyle: "short",
-  }).format(new Date(selectedLot.createdAt));
+  const formattedDate = dateFormatter(selectedLot.createdAt, i18n.language);
 
   return (
     <Modal
