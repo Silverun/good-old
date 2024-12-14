@@ -20,17 +20,21 @@ export const DarkModeSwitch = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <Switch value={isDarkTheme} onValueChange={toggleTheme} />
+    <View style={styles.switchContainer}>
+      <Switch
+        style={styles.switch}
+        value={isDarkTheme}
+        onValueChange={toggleTheme}
+      />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    borderWidth: 1,
-    // flex: 1,
-    // justifyContent: "center",
-    // alignItems: "center",
+  switchContainer: {
+    paddingBottom: 10,
+  },
+  switch: {
+    transform: [{ scaleX: 1.5 }, { scaleY: 1.5 }],
   },
 });

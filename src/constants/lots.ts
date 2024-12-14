@@ -1,10 +1,10 @@
 export const LOT_CATEGORIES = [
-  { id: 1, title: "Clothing" },
-  { id: 2, title: "Accessories" },
-  { id: 3, title: "Footwear" },
-  { id: 4, title: "Sports" },
-  { id: 5, title: "Electronics" },
-  { id: 6, title: "Other" },
+  { id: 1, title: "clothing" },
+  { id: 2, title: "accessories" },
+  { id: 3, title: "footwear" },
+  { id: 4, title: "sports" },
+  { id: 5, title: "electronics" },
+  { id: 6, title: "other" },
 ] as const;
 
 export const LOT_STATUS = {

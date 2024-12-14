@@ -1,18 +1,16 @@
-import { LOCALES } from "../constants";
+import { DEFAULT_LOCALE, LOCALES } from "../constants";
 
 export const dateFormatter = (date: string, lang: string) => {
   let selectedLocale: string | undefined;
 
-  for (const key in LOCALES) {
-    const localeKey = key as keyof typeof LOCALES;
-
-    if (LOCALES[localeKey].value === lang) {
-      selectedLocale = LOCALES[localeKey].date;
+  LOCALES.forEach((locale) => {
+    if (locale.value === lang) {
+      selectedLocale = locale.date;
     }
-  }
+  });
 
   if (!selectedLocale) {
-    selectedLocale = LOCALES.english.date;
+    selectedLocale = DEFAULT_LOCALE.date;
   }
 
   const formattedDate = new Intl.DateTimeFormat(selectedLocale, {

@@ -14,6 +14,7 @@ import {
 } from "../../../../../../services/database/lots/lotsService";
 import { useNavigation } from "@react-navigation/native";
 import { useToast } from "../../../../../../hooks/useToast";
+import { useTranslation } from "react-i18next";
 
 export interface AddLotFormData {
   title: string;
@@ -39,18 +40,16 @@ export const AddLotForm = ({ images }: AddLotFormProps) => {
   const { user } = useAppSelector((state) => state.user);
   const { goBack } = useNavigation();
   const { showToast } = useToast();
+  const { t } = useTranslation("lots", { keyPrefix: "addLot" });
+  const { t: tCat } = useTranslation("lots", { keyPrefix: "categories" });
 
   const {
     handleSubmit,
     control,
-    watch,
-    setValue,
     formState: { errors, isSubmitting },
   } = useForm<AddLotFormData>();
 
   const onLotSubmit = async (data: AddLotFormData) => {
-    watch("title");
-    setValue("title", "data");
     const imagesUrls = await uploadLotImages(images);
     const fullFormData: LotData = {
       ...data,
@@ -60,7 +59,7 @@ export const AddLotForm = ({ images }: AddLotFormProps) => {
     };
     try {
       await lotsService.addNewLot(fullFormData);
-      showToast("Lot added successfully");
+      showToast(t("addedSuccessfully"));
       goBack();
     } catch (error) {
       error instanceof Error && showToast(error.message, "error");
@@ -70,23 +69,23 @@ export const AddLotForm = ({ images }: AddLotFormProps) => {
   return (
     <View style={styles.container}>
       <RHFField
-        label={{ text: "Lot title" }}
+        label={{ text: t("lotTitle") }}
         controller={{
           name: "title",
           control,
           rules: {
-            required: "Title is required",
+            required: t("lotTitleRequired"),
             minLength: {
               value: 2,
-              message: "Lot title should be at least 2 characters",
+              message: t("lotTitleMinLength"),
             },
           },
         }}
-        input={{ placeholder: "Add descriptive lot title" }}
+        input={{ placeholder: t("lotTitlePlaceholder") }}
         error={{ errors }}
       />
       <View style={styles.picker_container}>
-        <TextCustom>Choose lot category</TextCustom>
+        <TextCustom>{t("lotCategory")}</TextCustom>
         <View style={styles.picker_wrapper}>
           <Picker
             style={styles.picker}
@@ -99,7 +98,7 @@ export const AddLotForm = ({ images }: AddLotFormProps) => {
               <Picker.Item
                 style={styles.picker_item}
                 key={category.id}
-                label={category.title}
+                label={tCat(category.title)}
                 value={category}
               />
             ))}
@@ -107,16 +106,16 @@ export const AddLotForm = ({ images }: AddLotFormProps) => {
         </View>
       </View>
       <RHFField
-        label={{ text: "Lot description" }}
+        label={{ text: t("lotDescription") }}
         controller={{
           name: "description",
           control,
           rules: {
-            required: "Description is required",
+            required: t("lotDescriptionRequired"),
           },
         }}
         input={{
-          placeholder: "Add detailed lot description",
+          placeholder: t("lotDescriptionPlaceholder"),
           multiline: true,
           numberOfLines: 5,
           maxLength: 500,
@@ -125,24 +124,24 @@ export const AddLotForm = ({ images }: AddLotFormProps) => {
         error={{ errors }}
       />
       <RHFField
-        label={{ text: "Price" }}
+        label={{ text: t("price") }}
         controller={{
           name: "price",
           control,
           rules: {
-            required: "Price is required",
+            required: t("priceRequired"),
             minLength: {
               value: 1,
-              message: "Lot price should be at least 1 character",
+              message: t("priceMinLength"),
             },
           },
         }}
-        input={{ placeholder: "Specify lot price", keyboardType: "numeric" }}
+        input={{ placeholder: t("pricePlaceholder"), keyboardType: "numeric" }}
         error={{ errors }}
       />
       <ButtonCustom
         style={styles.submit_button}
-        title="Add lot"
+        title={t("addLot")}
         onPress={handleSubmit(onLotSubmit)}
         loading={isSubmitting}
         disabled={isSubmitting}

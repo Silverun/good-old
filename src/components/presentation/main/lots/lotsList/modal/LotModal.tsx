@@ -28,7 +28,7 @@ export const LotModal = ({
   const styles = createStyle(theme);
   const { user } = useAppSelector((state) => state.user);
   const { showToast } = useToast();
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation("lots", { keyPrefix: "modal" });
 
   if (!modalVisible) {
     return null;
@@ -37,7 +37,7 @@ export const LotModal = ({
   const deleteLotHandler = async () => {
     try {
       await lotsService.deleteLot(selectedLot);
-      showToast("Lot deleted successfully");
+      showToast(t("deletedSuccessfully"));
       setModalVisible(false);
     } catch (error) {
       error instanceof Error && showToast(error.message, "error");
@@ -47,7 +47,7 @@ export const LotModal = ({
   const buyLotHandler = async () => {
     try {
       await lotsService.buyLot(selectedLot.id);
-      showToast("Lot bought successfully");
+      showToast(t("boughtSuccessfully"));
       setModalVisible(false);
     } catch (error) {
       error instanceof Error && showToast(error.message, "error");
@@ -75,7 +75,7 @@ export const LotModal = ({
         </View>
         <ScrollView style={styles.description}>
           <TextCustom size="h4">
-            {selectedLot.description || "No description available."}
+            {selectedLot.description || t("noDescription")}
           </TextCustom>
         </ScrollView>
         <LotActionButtons

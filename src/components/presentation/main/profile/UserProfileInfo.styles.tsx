@@ -35,8 +35,8 @@ export const styles = StyleSheet.create({
     flex: 1,
     gap: 10,
   },
-  darkMode: {
-    borderWidth: 1,
+  actionsItem: {
+    gap: 20,
     justifyContent: "space-between",
     alignItems: "center",
     flexDirection: "row",

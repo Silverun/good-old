@@ -1,25 +1,39 @@
 {
   "modal": {
     "delete": "Delete",
-    "buy": "Buy"
+    "buy": "Buy",
+    "deletedSuccessfully": "Lot deleted successfully",
+    "boughtSuccessfully": "Lot bought successfully",
+    "noDescription": "No description available"
   },
   "addLot": {
-    "heading": "Add lot",
+    "heading": "Add new lot",
     "lotTitle": "Lot title",
     "lotTitlePlaceholder": "Add descriptive lot title",
     "lotTitleRequired": "Title is required",
+    "lotTitleMinLength": "Lot title should be at least 2 characters",
     "lotCategory": "Choose lot category",
     "lotDescription": "Lot description",
     "lotDescriptionRequired": "Description is required",
     "lotDescriptionPlaceholder": "Add detailed lot description",
     "price": "Price",
     "priceRequired": "Price is required",
+    "priceMinLength": "Lot price should be at least 1 character",
     "pricePlaceholder": "Specify lot price",
-    "addLot": "Add lot"
+    "addLot": "Add lot",
+    "addedSuccessfully": "Lot added successfully"
   },
   "addImages": {
     "lotImages": "Lot images",
     "camera": "Camera",
     "gallery": "Gallery"
+  },
+  "categories": {
+    "clothing": "Clothing",
+    "accessories": "Accessories",
+    "footwear": "Footwear",
+    "sports": "Sports",
+    "electronics": "Electronics",
+    "other": "Other"
   }
 }

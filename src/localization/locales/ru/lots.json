@@ -1,25 +1,39 @@
 {
   "modal": {
     "delete": "Удалить",
-    "buy": "Купить"
+    "buy": "Купить",
+    "deletedSuccessfully": "Лот успешно удален",
+    "boughtSuccessfully": "Лот успешно куплен",
+    "noDescription": "Нет описания лота"
   },
   "addLot": {
-    "heading": "Добавить лот",
+    "heading": "Добавить новый лот",
     "lotTitle": "Название лота",
     "lotTitlePlaceholder": "Добавьте описательное название лота",
     "lotTitleRequired": "Название обязательно",
+    "lotTitleMinLength": "Название лота должно быть не менее 2 символов",
     "lotCategory": "Выберите категорию лота",
     "lotDescription": "Описание лота",
     "lotDescriptionRequired": "Описание обязательно",
     "lotDescriptionPlaceholder": "Добавьте детальное описание лота",
     "price": "Цена",
     "priceRequired": "Цена обязательна",
+    "priceMinLength": "Цена лота должна быть не менее 1 символа",
     "pricePlaceholder": "Укажите цену лота",
-    "addLot": "Добавить лот"
+    "addLot": "Добавить лот",
+    "addedSuccessfully": "Лот успешно добавлен"
   },
   "addImages": {
     "lotImages": "Фото лота",
     "camera": "Камера",
     "gallery": "Галерея"
+  },
+  "categories": {
+    "clothing": "Одежда",
+    "accessories": "Аксессуары",
+    "footwear": "Обувь",
+    "sports": "Спорт",
+    "electronics": "Электроника",
+    "other": "Другое"
   }
 }

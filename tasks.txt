@@ -1,21 +1,13 @@
 
-Add lot screen:
-
-- ! Check lot adding with ref to userId - string
-- Add async storage service
-- Lots item and list styling
-- Check redundant methods in firebase regarding fetching lots (getLots)
-- Check locales in createdAt time inside LotItem
-- Check locales constant file
 -! AddLotForm - images are uploaded even if form fails
-- Error handling addNewLot
-- RHF cleanup?
 - Empty description fails to submit!
 - ! Optimization on component, callback, handlers etc
-- ! Keyboard avoiding view for add lot
 - Check theme on load applied correctly
-- Scrollview add into add new lot! close on tap anywhere, button add lot visible, close keyboard on categories open
 - Pagination 
-- add trunk ... item in list - full in modal
 - RHK to another solution
+
+ASAP:
+- ! Keyboard avoiding view for add lot
+- Scrollview add into add new lot! close on tap anywhere, button add lot visible, close keyboard on categories open
+- ADD logo on login screen and icon while loading
 - ! Theme save and lang MMKV 2.12.2 and load

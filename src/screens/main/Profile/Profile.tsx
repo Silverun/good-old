@@ -3,9 +3,11 @@ import { userService } from "../../../services/database/user/userService";
 import { useAppSelector } from "../../../hooks";
 import { ButtonCustom } from "../../../components/common";
 import { UserProfileInfo } from "../../../components/presentation";
+import { useTranslation } from "react-i18next";
 
 const ProfileScreen = () => {
   const { user } = useAppSelector((state) => state.user);
+  const { t } = useTranslation("profile");
 
   const signOutUser = async () => {
     try {
@@ -20,7 +22,7 @@ const ProfileScreen = () => {
       <View style={styles.container}>
         <UserProfileInfo user={user} />
         <View style={styles.buttonBlock}>
-          <ButtonCustom title="Sign Out" onPress={signOutUser} />
+          <ButtonCustom title={t("signOut")} onPress={signOutUser} />
         </View>
       </View>
     );

@@ -1,6 +1,7 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 import { ButtonCustom } from "../../../../../../common";
+import { useTranslation } from "react-i18next";
 
 interface LotActionButtonsProps {
   isOwner: boolean;
@@ -13,15 +14,17 @@ export const LotActionButtons = ({
   deleteLotHandler,
   buyLotHandler,
 }: LotActionButtonsProps) => {
+  const { t } = useTranslation("lots", { keyPrefix: "modal" });
+
   const actions = (
     <>
-      <ButtonCustom title="Buy" onPress={buyLotHandler} />
+      <ButtonCustom title={t("buy")} onPress={buyLotHandler} />
     </>
   );
 
   const myActions = (
     <>
-      <ButtonCustom title="Delete" onPress={deleteLotHandler} />
+      <ButtonCustom title={t("delete")} onPress={deleteLotHandler} />
     </>
   );
 

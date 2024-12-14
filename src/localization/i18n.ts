@@ -8,6 +8,8 @@ import navigation from "./locales/en/navigation.json";
 import navigationRu from "./locales/ru/navigation.json";
 import permissions from "./locales/en/permissions.json";
 import permissionsRu from "./locales/ru/permissions.json";
+import profile from "./locales/en/profile.json";
+import profileRu from "./locales/ru/profile.json";
 
 export const resources = {
   en: {
@@ -15,12 +17,14 @@ export const resources = {
     navigation,
     lots,
     permissions,
+    profile,
   },
   ru: {
     auth: authRu,
     navigation: navigationRu,
     lots: lotsRu,
     permissions: permissionsRu,
+    profile: profileRu,
   },
 } as const;
 

@@ -12,7 +12,7 @@ interface UserProfileInfoProps {
 }
 
 export const UserProfileInfo = ({ user }: UserProfileInfoProps) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("profile");
   return (
     <>
       <View style={styles.userInfoContainer}>
@@ -32,16 +32,17 @@ export const UserProfileInfo = ({ user }: UserProfileInfoProps) => {
           {user.email}
         </TextCustom>
         <TextCustom style={styles.createdAt}>
-          Member since: {new Date(user.createdAt).toLocaleDateString()}
+          {t("memberSince")}
+          {new Date(user.createdAt).toLocaleDateString()}
         </TextCustom>
       </View>
       <View style={styles.actionsContainer}>
-        <View style={styles.darkMode}>
-          <TextCustom>Toggle dark mode</TextCustom>
+        <View style={styles.actionsItem}>
+          <TextCustom size="h4">{t("toggleDarkMode")}</TextCustom>
           <DarkModeSwitch />
         </View>
-        <View style={styles.darkMode}>
-          <TextCustom>Selected language</TextCustom>
+        <View style={styles.actionsItem}>
+          <TextCustom size="h4">{t("selectLanguage")}</TextCustom>
           <LangPicker />
         </View>
       </View>
