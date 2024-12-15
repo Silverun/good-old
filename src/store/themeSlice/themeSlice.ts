@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Appearance } from "react-native";
 import { type Theme, THEMES } from "../../constants/colors";
@@ -9,6 +9,7 @@ type ThemeState = {
 };
 
 const systemColorScheme = Appearance.getColorScheme();
+console.log(systemColorScheme);
 
 const initialState: ThemeState = {
   theme: systemColorScheme === "dark" ? THEMES.dark : THEMES.light,

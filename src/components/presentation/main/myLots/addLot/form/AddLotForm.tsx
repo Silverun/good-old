@@ -1,4 +1,4 @@
-import { View } from "react-native";
+import { Keyboard, KeyboardAvoidingView, View } from "react-native";
 import { ButtonCustom, RHFField, TextCustom } from "../../../../../common";
 import { useForm } from "react-hook-form";
 import { stylesThemed } from "./AddLotForm.styles";
@@ -89,6 +89,7 @@ export const AddLotForm = ({ images }: AddLotFormProps) => {
         <View style={styles.picker_wrapper}>
           <Picker
             style={styles.picker}
+            onFocus={() => Keyboard.dismiss()}
             mode="dropdown"
             dropdownIconColor={theme.textColor}
             selectedValue={selectedCategory}
@@ -139,6 +140,7 @@ export const AddLotForm = ({ images }: AddLotFormProps) => {
         input={{ placeholder: t("pricePlaceholder"), keyboardType: "numeric" }}
         error={{ errors }}
       />
+
       <ButtonCustom
         style={styles.submit_button}
         title={t("addLot")}
