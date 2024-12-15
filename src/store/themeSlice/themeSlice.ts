@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Appearance } from "react-native";
+import { Appearance, ColorSchemeName } from "react-native";
 import { type Theme, THEMES } from "../../constants/colors";
+import { appStorage } from "../../services/appStorage/appStorage";
+import { STORAGE_KEYS } from "../../constants/storage";
 
 type ThemeState = {
   theme: Theme;
@@ -9,11 +10,19 @@ type ThemeState = {
 };
 
 const systemColorScheme = Appearance.getColorScheme();
-console.log(systemColorScheme);
+const savedTheme = appStorage.getString(STORAGE_KEYS.theme);
+
+let initTheme: string | ColorSchemeName;
+
+if (savedTheme) {
+  initTheme = savedTheme;
+} else {
+  initTheme = systemColorScheme;
+}
 
 const initialState: ThemeState = {
-  theme: systemColorScheme === "dark" ? THEMES.dark : THEMES.light,
-  isDarkTheme: systemColorScheme === "dark",
+  theme: initTheme === "dark" ? THEMES.dark : THEMES.light,
+  isDarkTheme: initTheme === "dark",
 };
 
 export const themeSlice = createSlice({
@@ -23,12 +32,12 @@ export const themeSlice = createSlice({
     setDarkTheme: (state) => {
       state.theme = THEMES.dark;
       state.isDarkTheme = true;
-      AsyncStorage.setItem("theme", "dark");
+      appStorage.set(STORAGE_KEYS.theme, "dark");
     },
     setLightTheme: (state) => {
       state.theme = THEMES.light;
       state.isDarkTheme = false;
-      AsyncStorage.setItem("theme", "light");
+      appStorage.set(STORAGE_KEYS.theme, "light");
     },
   },
 });
