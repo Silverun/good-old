@@ -3,10 +3,8 @@ import { WIDTH } from "../../../../constants";
 
 export const styles = StyleSheet.create({
   container: {
-    flex: 5,
-    justifyContent: "center",
     alignItems: "center",
-    padding: 20,
+    paddingVertical: 20,
   },
   label: {
     alignSelf: "center",
@@ -15,6 +13,6 @@ export const styles = StyleSheet.create({
     width: WIDTH.fifty,
   },
   loginButton: {
-    marginTop: 30,
+    marginTop: 20,
   },
 });

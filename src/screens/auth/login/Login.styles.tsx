@@ -1,13 +1,20 @@
 import { StyleSheet } from "react-native";
+import { HEIGHT, WIDTH } from "../../../constants";
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: "center",
+  },
+  logo: {
+    width: WIDTH.thirty,
+    height: WIDTH.thirty,
+  },
+  logoBlock: {
+    alignItems: "center",
   },
   registerBlock: {
-    flex: 1,
     gap: 5,
-    justifyContent: "center",
     alignItems: "center",
   },
 });

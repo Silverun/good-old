@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { FONT_FAMILIES, Theme } from "../../../../../../constants";
+import { FONT_FAMILIES, HEIGHT, Theme } from "../../../../../../constants";
 
 export const stylesThemed = (theme: Theme) =>
   StyleSheet.create({
@@ -25,6 +25,7 @@ export const stylesThemed = (theme: Theme) =>
       backgroundColor: theme.inputBackground,
     },
     desc_text: {
+      maxHeight: HEIGHT.twenty,
       textAlignVertical: "top",
     },
     submit_button: {

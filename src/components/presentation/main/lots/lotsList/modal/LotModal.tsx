@@ -74,7 +74,7 @@ export const LotModal = ({
           <TextCustom size="h5">{formattedDate}</TextCustom>
         </View>
         <ScrollView style={styles.description}>
-          <TextCustom size="h4">
+          <TextCustom style={styles.descriptionText} size="h4">
             {selectedLot.description || t("noDescription")}
           </TextCustom>
         </ScrollView>

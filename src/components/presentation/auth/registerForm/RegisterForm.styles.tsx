@@ -3,9 +3,7 @@ import { WIDTH } from "../../../../constants";
 
 export const styles = StyleSheet.create({
   container: {
-    flex: 1,
     width: WIDTH.sixty,
-    justifyContent: "center",
   },
   label: {
     alignSelf: "center",

@@ -29,6 +29,9 @@ export const createStyle = (theme: Theme) =>
       paddingTop: 5,
       flex: 1,
     },
+    descriptionText: {
+      paddingBottom: 10,
+    },
     backButton: {
       position: "absolute",
       height: backButtonRadius,

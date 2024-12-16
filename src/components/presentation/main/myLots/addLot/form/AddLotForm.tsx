@@ -119,6 +119,7 @@ export const AddLotForm = ({ images }: AddLotFormProps) => {
           placeholder: t("lotDescriptionPlaceholder"),
           multiline: true,
           numberOfLines: 5,
+          scrollEnabled: true,
           maxLength: 500,
           style: styles.desc_text,
         }}

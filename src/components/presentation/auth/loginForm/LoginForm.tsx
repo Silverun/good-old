@@ -5,6 +5,7 @@ import { styles } from "./LoginForm.styles";
 import { ButtonCustom, RHFField } from "../../../common";
 import { userService } from "../../../../services/database/user/userService";
 import { useTranslation } from "react-i18next";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 interface LoginFormData {
   email: string;
