@@ -10,6 +10,8 @@ import permissions from "./locales/en/permissions.json";
 import permissionsRu from "./locales/ru/permissions.json";
 import profile from "./locales/en/profile.json";
 import profileRu from "./locales/ru/profile.json";
+import { appStorage } from "../services/appStorage/appStorage";
+import { STORAGE_KEYS } from "../constants/storage";
 
 export const resources = {
   en: {
@@ -28,9 +30,11 @@ export const resources = {
   },
 } as const;
 
+const savedLang = appStorage.getString(STORAGE_KEYS.lang);
+
 i18n.use(initReactI18next).init({
   resources: resources,
-  lng: "en",
+  lng: savedLang || "en",
   fallbackLng: "en",
   interpolation: {
     escapeValue: false,

@@ -53,7 +53,6 @@ export class FirebaseStorageService implements IStorageService {
         const path = folderPath + decodedUrl.split(folderPath)[1].split("?")[0];
         const reference = storage().ref(path);
         await reference.delete();
-        console.log(`Image at path ${path} deleted successfully.`);
       } catch (error) {
         throw error;
       }
@@ -61,7 +60,6 @@ export class FirebaseStorageService implements IStorageService {
 
     try {
       await Promise.all(deletePromises);
-      console.log("All images deleted successfully.");
     } catch (error) {
       console.error("Error while deleting images from Firebase:", error);
       throw error;

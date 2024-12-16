@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useThemeCustom } from "../../../hooks";
 import { FONT_FAMILIES, LOCALES, Theme } from "../../../constants";
 import { useTranslation } from "react-i18next";
+import { appStorage } from "../../../services/appStorage/appStorage";
+import { STORAGE_KEYS } from "../../../constants/storage";
 
 export const LangPicker = () => {
   const { theme } = useThemeCustom();
@@ -21,6 +23,7 @@ export const LangPicker = () => {
         onValueChange={(itemValue) => {
           i18n.changeLanguage(itemValue);
           setSelectedLang(itemValue);
+          appStorage.set(STORAGE_KEYS.lang, itemValue);
         }}
       >
         {LOCALES.map((locale) => (

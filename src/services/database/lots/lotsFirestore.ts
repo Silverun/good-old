@@ -42,7 +42,6 @@ export class LotsFirestore implements ILotsService {
   async deleteLot(lotId: string) {
     try {
       await this.lotsCollectionRef().doc(lotId).delete();
-      console.log(`Lot with id ${lotId} deleted successfully.`);
     } catch (error) {
       console.error(`Error deleting lot with id ${lotId}:`, error);
       throw error;
@@ -54,7 +53,6 @@ export class LotsFirestore implements ILotsService {
       await this.lotsCollectionRef<LotDataFirestoreIn>()
         .doc(lotId)
         .update({ status: LOT_STATUS.sold });
-      console.log(`Lot with id ${lotId} bought successfully.`);
     } catch (error) {
       console.error(`Error buying lot with id ${lotId}:`, error);
       throw error;
