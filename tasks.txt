@@ -1,13 +1,4 @@
 
--! AddLotForm - images are uploaded even if form fails
-- Empty description fails to submit!
-- ! Optimization on component, callback, handlers etc
-- Check theme on load applied correctly
+- AddLotForm - images are uploaded even if form fails
+- Optimization on component, callback, handlers etc
 - Pagination 
-- RHK to another solution
-
-ASAP:
-- ! Keyboard avoiding view for add lot
-- Scrollview add into add new lot! close on tap anywhere, button add lot visible, close keyboard on categories open
-- ADD logo on login screen and icon while loading
-- ! Theme save and lang MMKV 2.12.2 and load
